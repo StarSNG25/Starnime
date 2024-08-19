@@ -16,6 +16,7 @@ struct AnimeListView: View
 	@State private var year: Int?
 	@State private var season: String?
 	@State private var page = 1
+	@State private var isUpcoming = false
 	
 	var body: some View
 	{
@@ -34,64 +35,29 @@ struct AnimeListView: View
 				let currSeason = animeList[animeIndex].currSeason
 				let nextSeason = animeList[animeIndex].nextSeason
 				let prevSeason = animeList[animeIndex].prevSeason
-				let isUpcoming = season?.caseInsensitiveCompare("upcoming") == .orderedSame
 				
 				HStack
 				{
-					if isUpcoming
-					{
-						Button(action: {
-							Task
-							{
-								resetPage()
-								year = latestSeason!.year
-								season = latestSeason!.season
-								await fetchSeason()
-							}
-						}, label: {
-							Text(latestSeason!.string)
-								.font(.subheadline)
-						})
-						.frame(maxWidth: .infinity, alignment: .leading)
-					}
-					else
-					{
-						Button(action: {
-							Task
-							{
-								resetPage()
-								year = prevSeason.year
-								season = prevSeason.season
-								await fetchSeason()
-							}
-						}, label: {
-							Text(prevSeason.string)
-								.font(.subheadline)
-						})
-						.frame(maxWidth: .infinity, alignment: .leading)
-					}
+					Button(action: {
+						Task
+						{
+							resetPage()
+							year = prevSeason.year
+							season = prevSeason.season
+							await fetchSeason()
+						}
+					}, label: {
+						Text(prevSeason.string)
+							.font(.subheadline)
+					})
+					.frame(maxWidth: .infinity, alignment: .leading)
 					
-					if isUpcoming
-					{
-						Text("Later")
-							.font(.title3)
-							.fixedSize()
-							.frame(maxWidth: .infinity)
-					}
-					else
-					{
-						Text(currSeason)
-							.font(.title3)
-							.fixedSize()
-							.frame(maxWidth: .infinity)
-					}
+					Text(currSeason)
+						.font(.title3)
+						.fixedSize()
+						.frame(maxWidth: .infinity)
 					
-					if isUpcoming
-					{
-						Text("")
-							.frame(maxWidth: .infinity, alignment: .trailing)
-					}
-					else if currSeason != latestSeason?.string
+					if currSeason != latestSeason?.string
 					{
 						Button(action: {
 							Task
@@ -122,6 +88,34 @@ struct AnimeListView: View
 						})
 						.frame(maxWidth: .infinity, alignment: .trailing)
 					}
+				}
+				.padding(.horizontal, 8)
+			}
+			else if isUpcoming
+			{
+				HStack
+				{
+					Button(action: {
+						Task
+						{
+							resetPage()
+							year = latestSeason!.year
+							season = latestSeason!.season
+							await fetchSeason()
+						}
+					}, label: {
+						Text(latestSeason!.string)
+							.font(.subheadline)
+					})
+					.frame(maxWidth: .infinity, alignment: .leading)
+					
+					Text("Later")
+						.font(.title3)
+						.fixedSize()
+						.frame(maxWidth: .infinity)
+					
+					Text("")
+						.frame(maxWidth: .infinity, alignment: .trailing)
 				}
 				.padding(.horizontal, 8)
 			}
@@ -234,6 +228,13 @@ struct AnimeListView: View
 					{
 						self.animeList.append(contentsOf: animeListResponse.data)
 						self.pagination = animeListResponse.pagination
+						
+						isUpcoming = season?.caseInsensitiveCompare("upcoming") == .orderedSame
+						if isUpcoming
+						{
+							self.animeList.removeAll(where: { $0.season != nil })
+						}
+						
 //						if self.pagination == nil
 //						{
 //							self.pagination = animeList.pagination
