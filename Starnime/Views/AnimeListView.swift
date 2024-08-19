@@ -204,7 +204,12 @@ struct AnimeListView: View
 				}
 				else
 				{
-					ProgressView("Loading")
+					ZStack
+					{
+						Spacer()
+							.containerRelativeFrame([.horizontal, .vertical])
+						ProgressView("Loading")
+					}
 				}
 			}
 		}
