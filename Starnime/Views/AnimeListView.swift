@@ -16,6 +16,7 @@ struct AnimeListView: View
 	@State private var year: Int?
 	@State private var season: String?
 	@State private var page = 1
+	@State private var isLoading = false
 	@State private var isUpcoming = false
 	
 	var body: some View
@@ -150,7 +151,7 @@ struct AnimeListView: View
 												.aspectRatio(contentMode: .fit)
 												.cornerRadius(10)
 										}
-									placeholder:
+										placeholder:
 										{
 											ProgressView()
 										}
@@ -189,6 +190,11 @@ struct AnimeListView: View
 							}
 						}
 					}
+					
+					if isLoading
+					{
+						ProgressView()
+					}
 				}
 				else if let errorMessage = errorMessage
 				{
@@ -219,6 +225,8 @@ struct AnimeListView: View
 	
 	func fetchSeason() async
 	{
+		isLoading = true
+		
 		NetworkManager().fetchAnimeSeason(year: self.year, season: self.season, page: self.page)
 		{ result in
 			switch result
@@ -246,6 +254,7 @@ struct AnimeListView: View
 						self.errorMessage = error.localizedDescription
 					}
 			}
+			isLoading = false
 		}
 	}
 	
