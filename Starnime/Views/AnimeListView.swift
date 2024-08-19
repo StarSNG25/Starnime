@@ -38,19 +38,38 @@ struct AnimeListView: View
 				
 				HStack
 				{
-					Button(action: {
-						Task
-						{
-							resetPage()
-							year = prevSeason.year
-							season = prevSeason.season
-							await fetchSeason()
-						}
-					}, label: {
-						Text(prevSeason.string)
-							.font(.subheadline)
-					})
-					.frame(maxWidth: .infinity, alignment: .leading)
+					if isUpcoming
+					{
+						Button(action: {
+							Task
+							{
+								resetPage()
+								year = latestSeason!.year
+								season = latestSeason!.season
+								await fetchSeason()
+							}
+						}, label: {
+							Text(latestSeason!.string)
+								.font(.subheadline)
+						})
+						.frame(maxWidth: .infinity, alignment: .leading)
+					}
+					else
+					{
+						Button(action: {
+							Task
+							{
+								resetPage()
+								year = prevSeason.year
+								season = prevSeason.season
+								await fetchSeason()
+							}
+						}, label: {
+							Text(prevSeason.string)
+								.font(.subheadline)
+						})
+						.frame(maxWidth: .infinity, alignment: .leading)
+					}
 					
 					if isUpcoming
 					{
