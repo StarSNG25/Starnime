@@ -274,6 +274,7 @@ struct AnimeListView: View
 	func resetPage()
 	{
 		animeList = []
+		seenIDs = Set<Int>()
 		page = 1
 	}
 }
