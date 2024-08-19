@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SeasonsList: Codable
+struct Seasons: Codable
 {
 	let year: Int
 	let seasons: [String]

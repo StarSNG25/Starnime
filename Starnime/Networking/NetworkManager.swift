@@ -157,5 +157,5 @@ struct AnimeListResponse: Codable
 
 struct SeasonsListResponse: Codable
 {
-	let data: [SeasonsList]
+	let data: [Seasons]
 }
