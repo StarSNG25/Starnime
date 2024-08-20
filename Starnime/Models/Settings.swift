@@ -12,29 +12,6 @@ class Settings: ObservableObject
 {
 	@AppStorage("isDarkMode") var isDarkMode: Bool = true
 	@AppStorage("titleLanguage") var titleLanguage: TitleLanguage = .default
-//	private let darkModeKey = "isDarkMode"
-//	private let titleLanguageKey = "titleLanguage"
-//	
-//	@Published var isDarkMode: Bool
-//	{
-//		didSet
-//		{
-//			UserDefaults.standard.set(isDarkMode, forKey: darkModeKey)
-//		}
-//	}
-//	@Published var titleLanguage: TitleLanguage
-//	{
-//		didSet
-//		{
-//			UserDefaults.standard.set(titleLanguage.rawValue, forKey: titleLanguageKey)
-//		}
-//	}
-//	
-//	init()
-//	{
-//		self.isDarkMode = UserDefaults.standard.object(forKey: darkModeKey) as? Bool ?? true
-//		self.titleLanguage = TitleLanguage(rawValue: UserDefaults.standard.string(forKey: titleLanguageKey) ?? TitleLanguage.default.rawValue) ?? .default
-//	}
 }
 
 enum TitleLanguage: String, CaseIterable, Identifiable
