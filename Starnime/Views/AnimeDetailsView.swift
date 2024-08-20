@@ -110,7 +110,7 @@ struct AnimeDetailsView: View
 		.navigationTitle("Details")
 	}
 	
-	func fetchAnime() async
+	private func fetchAnime() async
 	{
 		errorMessage = nil
 		

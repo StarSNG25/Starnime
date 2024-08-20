@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AnimeListView: View
 {
+	@EnvironmentObject var settings: Settings
 	@State private var animeList: [Anime] = []
 	@State private var pagination: Pagination?
 	@State private var latestSeason: Season?
@@ -28,9 +29,20 @@ struct AnimeListView: View
 		
 		NavigationStack
 		{
-			Text("Seasonal Anime")
-				.font(.title)
-				.fontWeight(.bold)
+			HStack
+			{
+				Text("Seasonal Anime")
+					.font(.title)
+					.fontWeight(.bold)
+					.frame(maxWidth: .infinity, alignment: .center)
+				
+				NavigationLink(destination: SettingsView())
+				{
+					Image(systemName: "gear")
+						.font(.title)
+				}
+			}
+			.padding(.horizontal, 8)
 			
 			if let animeIndex = animeList.firstIndex(where: { $0.currSeason != "" })
 			{
@@ -134,15 +146,9 @@ struct AnimeListView: View
 							{
 								VStack
 								{
-									Text(anime.title)
+									Text(displayTitle(for: anime))
 										.font(.title)
 										.foregroundColor(.primary)
-//									Text(anime.title_japanese!)
-//										.font(.title3)
-//										.foregroundColor(.primary)
-//									Text(anime.title_english!)
-//										.font(.title3)
-//										.foregroundColor(.primary)
 									
 									if let imageUrl = URL(string: anime.images.webp.large_image_url)
 									{
@@ -229,7 +235,7 @@ struct AnimeListView: View
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
 	}
 	
-	func fetchSeason() async
+	private func fetchSeason() async
 	{
 		isLoading = true
 		
@@ -276,16 +282,30 @@ struct AnimeListView: View
 		}
 	}
 	
-	func resetPage()
+	private func resetPage()
 	{
 		animeList = []
 		seenIDs = Set<Int>()
 		page = 1
 		errorMessage = nil
 	}
+	
+	private func displayTitle(for anime: Anime) -> String
+	{
+		switch settings.titleLanguage
+		{
+			case .default:
+				return anime.title
+			case .japanese:
+				return anime.title_japanese ?? anime.title
+			case .english:
+				return anime.title_english ?? anime.title
+		}
+	}
 }
 
 #Preview
 {
     AnimeListView()
+		.environmentObject(Settings())
 }

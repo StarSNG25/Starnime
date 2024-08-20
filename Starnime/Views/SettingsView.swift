@@ -7,12 +7,31 @@
 
 import SwiftUI
 
-struct SettingsView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+struct SettingsView: View
+{
+	@StateObject private var settings = Settings()
+	
+	var body: some View
+	{
+		Form
+		{
+			Section(header: Text("Appearance"))
+			{
+				Toggle("Dark Mode", isOn: $settings.isDarkMode)
+				Picker("Title Language", selection: $settings.titleLanguage)
+				{
+					ForEach(TitleLanguage.allCases)
+					{ language in
+						Text(language.rawValue).tag(language)
+					}
+				}
+			}
+		}
+		.navigationTitle("Settings")
+	}
 }
 
-#Preview {
+#Preview
+{
     SettingsView()
 }
