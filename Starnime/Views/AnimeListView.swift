@@ -31,6 +31,10 @@ struct AnimeListView: View
 		{
 			HStack
 			{
+				Image(systemName: "gear")
+					.font(.title)
+					.opacity(0)
+				
 				Text("Seasonal Anime")
 					.font(.title)
 					.fontWeight(.bold)
@@ -43,6 +47,7 @@ struct AnimeListView: View
 				}
 			}
 			.padding(.horizontal, 8)
+			.padding(.bottom, 1)
 			
 			if let animeIndex = animeList.firstIndex(where: { $0.currSeason != "" })
 			{
