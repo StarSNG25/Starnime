@@ -176,7 +176,7 @@ struct AnimeListView: View
 									
 									Divider()
 								}
-								.padding(.horizontal)
+								.padding(.horizontal, 8)
 								.onAppear
 								{
 									if anime.mal_id == animeList.last?.mal_id && pagination!.has_next_page
