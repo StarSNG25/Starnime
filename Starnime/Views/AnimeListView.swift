@@ -43,7 +43,6 @@ struct AnimeListView: View
 					Button(action: {
 						Task
 						{
-							resetPage()
 							year = prevSeason.year
 							season = prevSeason.season
 							await fetchSeason()
@@ -64,7 +63,6 @@ struct AnimeListView: View
 						Button(action: {
 							Task
 							{
-								resetPage()
 								year = nextSeason.year
 								season = nextSeason.season
 								await fetchSeason()
@@ -80,7 +78,6 @@ struct AnimeListView: View
 						Button(action: {
 							Task
 							{
-								resetPage()
 								season = "upcoming"
 								await fetchSeason()
 							}
@@ -100,7 +97,6 @@ struct AnimeListView: View
 					Button(action: {
 						Task
 						{
-							resetPage()
 							year = latestSeason!.year
 							season = latestSeason!.season
 							await fetchSeason()
@@ -223,7 +219,6 @@ struct AnimeListView: View
 		}
 		.refreshable
 		{
-			resetPage()
 			await fetchSeason()
 		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -232,6 +227,7 @@ struct AnimeListView: View
 	func fetchSeason() async
 	{
 		isLoading = true
+		resetPage()
 		
 		NetworkManager().fetchAnimeSeason(year: self.year, season: self.season, page: self.page)
 		{ result in
@@ -281,6 +277,7 @@ struct AnimeListView: View
 		animeList = []
 		seenIDs = Set<Int>()
 		page = 1
+		errorMessage = nil
 	}
 }
 

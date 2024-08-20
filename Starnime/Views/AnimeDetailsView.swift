@@ -11,7 +11,6 @@ struct AnimeDetailsView: View
 {
 	@State private var anime: Anime?
 	@State private var errorMessage: String?
-	@State private var isLoading = false
 	let malId: Int
 
 	var body: some View
@@ -24,7 +23,7 @@ struct AnimeDetailsView: View
 				{
 					if let anime = anime
 					{
-						VStack
+						Group
 						{
 							Text(anime.title)
 								.font(.title)
@@ -91,7 +90,7 @@ struct AnimeDetailsView: View
 				.padding(.horizontal, 8)
 			}
 			
-			if isLoading
+			if anime == nil && errorMessage == nil
 			{
 				ProgressView("Loading")
 					.frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -113,7 +112,7 @@ struct AnimeDetailsView: View
 	
 	func fetchAnime() async
 	{
-		isLoading = true
+		errorMessage = nil
 		
 		NetworkManager().fetchAnimeDetails(for: malId)
 		{ result in
@@ -130,7 +129,6 @@ struct AnimeDetailsView: View
 						self.errorMessage = error.localizedDescription
 					}
 			}
-			isLoading = false
 		}
 	}
 }
