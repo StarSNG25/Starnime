@@ -29,13 +29,11 @@ struct AnimeDetailsView: View
 								.font(.title)
 							if let title = anime.title_japanese, title != anime.title
 							{
-//								Spacer()
 								Text(title)
 									.font(.title3)
 							}
 							if let title = anime.title_english, title != anime.title
 							{
-//								Spacer()
 								Text(title)
 									.font(.title3)
 							}
@@ -48,6 +46,7 @@ struct AnimeDetailsView: View
 							{ image in
 								image.resizable()
 									.aspectRatio(contentMode: .fit)
+									.frame(maxWidth: 380)
 									.cornerRadius(10)
 							}
 							placeholder:
