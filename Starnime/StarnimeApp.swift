@@ -16,9 +16,15 @@ struct StarnimeApp: App
 	{
 		WindowGroup
 		{
-			AnimeListView()
-				.environmentObject(settings)
-				.preferredColorScheme(settings.isDarkMode ? .dark : .light)
+			#if os(macOS)
+				AnimeListView_macOS()
+					.environmentObject(settings)
+					.preferredColorScheme(settings.isDarkMode ? .dark : .light)
+			#else
+				AnimeListView()
+					.environmentObject(settings)
+					.preferredColorScheme(settings.isDarkMode ? .dark : .light)
+			#endif
 		}
 	}
 }

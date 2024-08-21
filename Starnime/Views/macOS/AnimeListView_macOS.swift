@@ -1,13 +1,13 @@
 //
-//  AnimeListView.swift
+//  AnimeListView_macOS.swift
 //  Starnime
 //
-//  Created by Star_SNG on 2024/08/08.
+//  Created by Star_SNG on 2024/08/21.
 //
 
 import SwiftUI
 
-struct AnimeListView: View
+struct AnimeListView_macOS: View
 {
 	@EnvironmentObject var settings: Settings
 	@State private var animeList: [Anime] = []
@@ -43,7 +43,6 @@ struct AnimeListView: View
 				}
 				.frame(maxWidth: .infinity, alignment: .trailing)
 			}
-			.padding(.horizontal, 8)
 			.padding(.bottom, 1)
 			
 			if let animeIndex = animeList.firstIndex(where: { $0.currSeason != "" })
@@ -105,7 +104,6 @@ struct AnimeListView: View
 						.frame(maxWidth: .infinity, alignment: .trailing)
 					}
 				}
-				.padding(.horizontal, 8)
 			}
 			else if isUpcoming
 			{
@@ -133,7 +131,6 @@ struct AnimeListView: View
 					Text("")
 						.frame(maxWidth: .infinity, alignment: .trailing)
 				}
-				.padding(.horizontal, 8)
 			}
 			
 			ScrollView
@@ -183,8 +180,10 @@ struct AnimeListView: View
 									}
 									
 									Divider()
+										.opacity(0)
 								}
 								.padding(.horizontal, 8)
+								.padding(.top, 8)
 								.onAppear
 								{
 									if anime.mal_id == animeList.last?.mal_id && pagination!.has_next_page
@@ -220,6 +219,7 @@ struct AnimeListView: View
 					}
 				}
 			}
+			.cornerRadius(8)
 		}
 		.onAppear
 		{
@@ -235,6 +235,7 @@ struct AnimeListView: View
 			await fetchSeason()
 		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
+		.padding()
 	}
 	
 	private func fetchSeason() async
@@ -303,6 +304,6 @@ struct AnimeListView: View
 
 #Preview
 {
-    AnimeListView()
+	AnimeListView_macOS()
 		.environmentObject(Settings())
 }
