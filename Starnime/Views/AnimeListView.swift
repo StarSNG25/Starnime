@@ -27,20 +27,21 @@ struct AnimeListView: View
 		{
 			HStack
 			{
-				Image(systemName: "gear")
-					.font(.title)
-					.opacity(0)
+				Text("")
+					.frame(maxWidth: .infinity, alignment: .leading)
 				
 				Text("Seasonal Anime")
 					.font(.title)
 					.fontWeight(.bold)
-					.frame(maxWidth: .infinity, alignment: .center)
+					.fixedSize()
+					.frame(maxWidth: .infinity)
 				
 				NavigationLink(destination: SettingsView())
 				{
 					Image(systemName: "gear")
 						.font(.title)
 				}
+				.frame(maxWidth: .infinity, alignment: .trailing)
 			}
 			#if os(iOS)
 				.padding(.horizontal, 8)
@@ -285,11 +286,6 @@ struct AnimeListView: View
 						{
 							self.animeList.removeAll(where: { $0.season != nil })
 						}
-						
-//						if self.pagination == nil
-//						{
-//							self.pagination = animeList.pagination
-//						}
 					}
 				case .failure(let error):
 					DispatchQueue.main.async
