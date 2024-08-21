@@ -23,10 +23,6 @@ struct AnimeListView: View
 	
 	var body: some View
 	{
-		#if os(macOS)
-			Spacer()
-		#endif
-		
 		NavigationStack
 		{
 			HStack
@@ -46,7 +42,9 @@ struct AnimeListView: View
 						.font(.title)
 				}
 			}
-			.padding(.horizontal, 8)
+			#if os(iOS)
+				.padding(.horizontal, 8)
+			#endif
 			.padding(.bottom, 1)
 			
 			if let animeIndex = animeList.firstIndex(where: { $0.currSeason != "" })
@@ -108,7 +106,9 @@ struct AnimeListView: View
 						.frame(maxWidth: .infinity, alignment: .trailing)
 					}
 				}
-				.padding(.horizontal, 8)
+				#if os(iOS)
+					.padding(.horizontal, 8)
+				#endif
 			}
 			else if isUpcoming
 			{
@@ -136,7 +136,9 @@ struct AnimeListView: View
 					Text("")
 						.frame(maxWidth: .infinity, alignment: .trailing)
 				}
-				.padding(.horizontal, 8)
+				#if os(iOS)
+					.padding(.horizontal, 8)
+				#endif
 			}
 			
 			ScrollView
@@ -186,8 +188,14 @@ struct AnimeListView: View
 									}
 									
 									Divider()
+									#if os(macOS)
+										.opacity(0)
+									#endif
 								}
 								.padding(.horizontal, 8)
+								#if os(macOS)
+									.padding(.top, 8)
+								#endif
 								.onAppear
 								{
 									if anime.mal_id == animeList.last?.mal_id && pagination!.has_next_page
@@ -223,6 +231,9 @@ struct AnimeListView: View
 					}
 				}
 			}
+			#if os(macOS)
+				.cornerRadius(8)
+			#endif
 		}
 		.onAppear
 		{
@@ -238,6 +249,9 @@ struct AnimeListView: View
 			await fetchSeason()
 		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
+		#if os(macOS)
+			.padding()
+		#endif
 	}
 	
 	private func fetchSeason() async
