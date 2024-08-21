@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5E0781162C6E09F000D90835 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E0781152C6E09F000D90835 /* Launch Screen.storyboard */; };
+		5E0781162C6E09F000D90835 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E0781152C6E09F000D90835 /* Launch Screen.storyboard */; platformFilters = (ios, maccatalyst, ); };
 		5E2F5C7D2C747938007E9B2D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2F5C7C2C747938007E9B2D /* SettingsView.swift */; };
 		5E2F5C842C7491DC007E9B2D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5E2F5C832C7491DC007E9B2D /* Settings.bundle */; };
 		5E4CFC762C74735C0020CA33 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CFC752C74735C0020CA33 /* Settings.swift */; };
@@ -101,13 +101,20 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
+		5E80F04B2C7595930082C2CA /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				5E0781152C6E09F000D90835 /* Launch Screen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		5E94A38E2C64B77B006DF865 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				5E94A3982C64CC56006DF865 /* AnimeDetailsView.swift */,
 				5E94A38F2C64B814006DF865 /* AnimeListView.swift */,
 				5E2F5C7C2C747938007E9B2D /* SettingsView.swift */,
-				5E0781152C6E09F000D90835 /* Launch Screen.storyboard */,
 				5EFE438F2C64A0D800163C60 /* ContentView.swift */,
 			);
 			path = Views;
@@ -167,6 +174,7 @@
 				5E94A3922C64CA9B006DF865 /* Models */,
 				5E94A3952C64CB36006DF865 /* Networking */,
 				5E94A38E2C64B77B006DF865 /* Views */,
+				5E80F04B2C7595930082C2CA /* Storyboards */,
 				5E2F5C7E2C74904A007E9B2D /* Resource */,
 				5EFE43932C64A0D900163C60 /* Starnime.entitlements */,
 				5EFE43942C64A0D900163C60 /* Preview Content */,
