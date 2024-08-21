@@ -23,19 +23,19 @@ struct AnimeDetailsView: View
 				{
 					if let anime = anime
 					{
-						Group
+						VStack(spacing: 8)
 						{
 							Text(anime.title)
 								.font(.title)
-							if let title = anime.title_japanese
+							if let title = anime.title_japanese, title != anime.title
 							{
-								Spacer()
+//								Spacer()
 								Text(title)
 									.font(.title3)
 							}
-							if let title = anime.title_english
+							if let title = anime.title_english, title != anime.title
 							{
-								Spacer()
+//								Spacer()
 								Text(title)
 									.font(.title3)
 							}
