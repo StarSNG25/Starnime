@@ -148,7 +148,7 @@ struct AnimeListView: View
 							{
 								VStack
 								{
-									Text(displayTitle(for: anime))
+									Text(displayTitle(for: anime, settings: settings))
 										.font(.title)
 										.foregroundColor(.primary)
 									
@@ -285,19 +285,6 @@ struct AnimeListView: View
 		seenIDs = Set<Int>()
 		page = 1
 		errorMessage = nil
-	}
-	
-	private func displayTitle(for anime: Anime) -> String
-	{
-		switch settings.titleLanguage
-		{
-			case .default:
-				return anime.title
-			case .japanese:
-				return anime.title_japanese ?? anime.title
-			case .english:
-				return anime.title_english ?? anime.title
-		}
 	}
 }
 

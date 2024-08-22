@@ -18,6 +18,7 @@
 		5E94A3992C64CC56006DF865 /* AnimeDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E94A3982C64CC56006DF865 /* AnimeDetailsView.swift */; };
 		5EE1FCD22C673F8600DDAAD3 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE1FCD12C673F8600DDAAD3 /* StringExtension.swift */; };
 		5EE8F91B2C75DE490050E835 /* AnimeListView_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE8F91A2C75DE490050E835 /* AnimeListView_macOS.swift */; };
+		5EE8F91E2C771D880050E835 /* ViewUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE8F91D2C771D880050E835 /* ViewUtil.swift */; };
 		5EFE438E2C64A0D800163C60 /* StarnimeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFE438D2C64A0D800163C60 /* StarnimeApp.swift */; };
 		5EFE43902C64A0D800163C60 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFE438F2C64A0D800163C60 /* ContentView.swift */; };
 		5EFE43922C64A0D900163C60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EFE43912C64A0D900163C60 /* Assets.xcassets */; };
@@ -56,6 +57,7 @@
 		5E94A3982C64CC56006DF865 /* AnimeDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeDetailsView.swift; sourceTree = "<group>"; };
 		5EE1FCD12C673F8600DDAAD3 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		5EE8F91A2C75DE490050E835 /* AnimeListView_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeListView_macOS.swift; sourceTree = "<group>"; };
+		5EE8F91D2C771D880050E835 /* ViewUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtil.swift; sourceTree = "<group>"; };
 		5EFE438A2C64A0D800163C60 /* Starnime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Starnime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EFE438D2C64A0D800163C60 /* StarnimeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarnimeApp.swift; sourceTree = "<group>"; };
 		5EFE438F2C64A0D800163C60 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -157,6 +159,14 @@
 			path = macOS;
 			sourceTree = "<group>";
 		};
+		5EE8F91C2C771D660050E835 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				5EE8F91D2C771D880050E835 /* ViewUtil.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		5EFE43812C64A0D800163C60 = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +195,7 @@
 				5E94A3922C64CA9B006DF865 /* Models */,
 				5E94A3952C64CB36006DF865 /* Networking */,
 				5E94A38E2C64B77B006DF865 /* Views */,
+				5EE8F91C2C771D660050E835 /* Util */,
 				5E80F04B2C7595930082C2CA /* Storyboards */,
 				5E2F5C7E2C74904A007E9B2D /* Resource */,
 				5EFE43932C64A0D900163C60 /* Starnime.entitlements */,
@@ -352,6 +363,7 @@
 			files = (
 				5E94A3942C64CAB0006DF865 /* Anime.swift in Sources */,
 				5EE1FCD22C673F8600DDAAD3 /* StringExtension.swift in Sources */,
+				5EE8F91E2C771D880050E835 /* ViewUtil.swift in Sources */,
 				5E94A3902C64B814006DF865 /* AnimeListView.swift in Sources */,
 				5E94A3972C64CB78006DF865 /* NetworkManager.swift in Sources */,
 				5E8C125A2C6F48AE001F3BB5 /* Seasons.swift in Sources */,
