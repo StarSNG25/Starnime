@@ -19,3 +19,21 @@ func displayTitle(for anime: Anime, settings: Settings) -> String
 			return anime.title_english ?? anime.title
 	}
 }
+
+func removeDuplicateAnime(animeListResponse: AnimeListResponse) -> [Anime]
+{
+	var seenIDs = Set<Int>()
+	
+	return animeListResponse.data.filter
+	{ anime in
+	   if seenIDs.contains(anime.mal_id)
+	   {
+		   return false
+	   }
+	   else
+	   {
+		   seenIDs.insert(anime.mal_id)
+		   return true
+	   }
+   }
+}

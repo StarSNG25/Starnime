@@ -16,7 +16,6 @@ struct AnimeListView_macOS: View
 	@State private var errorMessage: String?
 	@State private var year: Int?
 	@State private var season: String?
-	@State private var seenIDs = Set<Int>()
 	@State private var page = 1
 	@State private var isLoading = false
 	@State private var isUpcoming = false
@@ -249,18 +248,7 @@ struct AnimeListView_macOS: View
 				case .success(let animeListResponse):
 					DispatchQueue.main.async
 					{
-						let animeList = animeListResponse.data.filter
-						{ anime in
-							if seenIDs.contains(anime.mal_id)
-							{
-								return false
-							}
-							else
-							{
-								seenIDs.insert(anime.mal_id)
-								return true
-							}
-						}
+						let animeList = removeDuplicateAnime(animeListResponse: animeListResponse)
 						self.animeList.append(contentsOf: animeList)
 						self.pagination = animeListResponse.pagination
 						
@@ -283,7 +271,6 @@ struct AnimeListView_macOS: View
 	private func resetPage()
 	{
 		animeList = []
-		seenIDs = Set<Int>()
 		page = 1
 		errorMessage = nil
 	}
