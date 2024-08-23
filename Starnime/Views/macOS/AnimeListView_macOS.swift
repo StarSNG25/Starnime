@@ -9,16 +9,8 @@ import SwiftUI
 
 struct AnimeListView_macOS: View
 {
+	@EnvironmentObject var viewModel: AnimeListViewModel
 	@EnvironmentObject var settings: Settings
-	@State private var animeList: [Anime] = []
-	@State private var pagination: Pagination?
-	@State private var latestSeason: Season?
-	@State private var errorMessage: String?
-	@State private var year: Int?
-	@State private var season: String?
-	@State private var page = 1
-	@State private var isLoading = false
-	@State private var isUpcoming = false
 	
 	var body: some View
 	{
@@ -44,21 +36,21 @@ struct AnimeListView_macOS: View
 			}
 			.padding(.bottom, 1)
 			
-			if let animeIndex = animeList.firstIndex(where: { $0.currSeason != "" })
+			if let animeIndex = viewModel.animeList.firstIndex(where: { $0.currSeason != "" })
 			{
-				let currSeason = animeList[animeIndex].currSeason
-				let nextSeason = animeList[animeIndex].nextSeason
-				let prevSeason = animeList[animeIndex].prevSeason
+				let currSeason = viewModel.animeList[animeIndex].currSeason
+				let nextSeason = viewModel.animeList[animeIndex].nextSeason
+				let prevSeason = viewModel.animeList[animeIndex].prevSeason
 				
 				HStack
 				{
 					Button(action: {
 						Task
 						{
-							resetPage()
-							year = prevSeason.year
-							season = prevSeason.season
-							await fetchSeason()
+							viewModel.resetPage()
+							viewModel.year = prevSeason.year
+							viewModel.season = prevSeason.season
+							await viewModel.fetchSeason()
 						}
 					}, label: {
 						Text(prevSeason.string)
@@ -71,15 +63,15 @@ struct AnimeListView_macOS: View
 						.fixedSize()
 						.frame(maxWidth: .infinity)
 					
-					if currSeason != latestSeason?.string
+					if currSeason != viewModel.latestSeason?.string
 					{
 						Button(action: {
 							Task
 							{
-								resetPage()
-								year = nextSeason.year
-								season = nextSeason.season
-								await fetchSeason()
+								viewModel.resetPage()
+								viewModel.year = nextSeason.year
+								viewModel.season = nextSeason.season
+								await viewModel.fetchSeason()
 							}
 						}, label: {
 							Text(nextSeason.string)
@@ -92,9 +84,9 @@ struct AnimeListView_macOS: View
 						Button(action: {
 							Task
 							{
-								resetPage()
-								season = "upcoming"
-								await fetchSeason()
+								viewModel.resetPage()
+								viewModel.season = "upcoming"
+								await viewModel.fetchSeason()
 							}
 						}, label: {
 							Text("Later")
@@ -104,20 +96,20 @@ struct AnimeListView_macOS: View
 					}
 				}
 			}
-			else if isUpcoming
+			else if viewModel.isUpcoming
 			{
 				HStack
 				{
 					Button(action: {
 						Task
 						{
-							resetPage()
-							year = latestSeason!.year
-							season = latestSeason!.season
-							await fetchSeason()
+							viewModel.resetPage()
+							viewModel.year = viewModel.latestSeason!.year
+							viewModel.season = viewModel.latestSeason!.season
+							await viewModel.fetchSeason()
 						}
 					}, label: {
-						Text(latestSeason!.string)
+						Text(viewModel.latestSeason!.string)
 							.font(.subheadline)
 					})
 					.frame(maxWidth: .infinity, alignment: .leading)
@@ -134,17 +126,17 @@ struct AnimeListView_macOS: View
 			
 			ScrollView
 			{
-				if !animeList.isEmpty
+				if !viewModel.animeList.isEmpty
 				{
 					LazyVStack
 					{
-						ForEach(animeList)
+						ForEach(viewModel.animeList)
 						{ anime in
 							NavigationLink(destination: AnimeDetailsView(malId: anime.mal_id))
 							{
 								VStack
 								{
-									Text(displayTitle(for: anime, settings: settings))
+									Text(viewModel.displayTitle(for: anime, settings: settings))
 										.font(.title)
 										.foregroundColor(.primary)
 									
@@ -185,12 +177,12 @@ struct AnimeListView_macOS: View
 								.padding(.top, 8)
 								.onAppear
 								{
-									if anime.mal_id == animeList.last?.mal_id && pagination!.has_next_page
+									if anime.mal_id == viewModel.animeList.last?.mal_id && viewModel.pagination!.has_next_page
 									{
 										Task
 										{
-											page += 1
-											await fetchSeason()
+											viewModel.page += 1
+											await viewModel.fetchSeason()
 										}
 									}
 								}
@@ -198,12 +190,12 @@ struct AnimeListView_macOS: View
 						}
 					}
 					
-					if isLoading
+					if viewModel.isLoading
 					{
 						ProgressView()
 					}
 				}
-				else if let errorMessage = errorMessage
+				else if let errorMessage = viewModel.errorMessage
 				{
 					Text(errorMessage)
 						.foregroundColor(.red)
@@ -224,60 +216,23 @@ struct AnimeListView_macOS: View
 		{
 			Task
 			{
-				await fetchSeason()
-				latestSeason = await NetworkManager().getLatestSeason()
+				await viewModel.fetchSeason()
+				viewModel.latestSeason = await NetworkManager().getLatestSeason()
 			}
 		}
 		.refreshable
 		{
-			resetPage()
-			await fetchSeason()
+			viewModel.resetPage()
+			await viewModel.fetchSeason()
 		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
 		.padding()
-	}
-	
-	private func fetchSeason() async
-	{
-		isLoading = true
-		
-		NetworkManager().fetchAnimeSeason(year: self.year, season: self.season, page: self.page)
-		{ result in
-			switch result
-			{
-				case .success(let animeListResponse):
-					DispatchQueue.main.async
-					{
-						let animeList = removeDuplicateAnime(animeListResponse: animeListResponse)
-						self.animeList.append(contentsOf: animeList)
-						self.pagination = animeListResponse.pagination
-						
-						isUpcoming = season?.caseInsensitiveCompare("upcoming") == .orderedSame
-						if isUpcoming
-						{
-							self.animeList.removeAll(where: { $0.season != nil })
-						}
-					}
-				case .failure(let error):
-					DispatchQueue.main.async
-					{
-						self.errorMessage = error.localizedDescription
-					}
-			}
-			isLoading = false
-		}
-	}
-	
-	private func resetPage()
-	{
-		animeList = []
-		page = 1
-		errorMessage = nil
 	}
 }
 
 #Preview
 {
 	AnimeListView_macOS()
+		.environmentObject(AnimeListViewModel())
 		.environmentObject(Settings())
 }

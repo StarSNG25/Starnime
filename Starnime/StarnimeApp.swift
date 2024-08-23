@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct StarnimeApp: App
 {
+	@StateObject private var viewModel = AnimeListViewModel()
 	@StateObject private var settings = Settings()
 	
 	var body: some Scene
@@ -18,10 +19,12 @@ struct StarnimeApp: App
 		{
 			#if os(macOS)
 				AnimeListView_macOS()
+					.environmentObject(viewModel)
 					.environmentObject(settings)
 					.preferredColorScheme(settings.isDarkMode ? .dark : .light)
 			#else
 				AnimeListView()
+					.environmentObject(viewModel)
 					.environmentObject(settings)
 					.preferredColorScheme(settings.isDarkMode ? .dark : .light)
 			#endif
