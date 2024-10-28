@@ -18,11 +18,11 @@ class NetworkManager
 		self.session = URLSession(configuration: config)
 	}
 	
-	func fetchAnimeSeason(year: Int?, season: String?, page: Int, completion: @escaping (Result<AnimeListResponse, Error>) -> Void)
+	func fetchAnimeSeason(year: Int?, season: String?, page: Int, completion: @escaping @Sendable (Result<AnimeListResponse, Error>) -> Void)
 	{
-//		let urlString = year == nil || season == nil
-//						? "https://api.jikan.moe/v4/seasons/now?page=\(page)"
-//						: "https://api.jikan.moe/v4/seasons/\(year!)/\(season!)?page=\(page)"
+		//		let urlString = year == nil || season == nil
+		//						? "https://api.jikan.moe/v4/seasons/now?page=\(page)"
+		//						: "https://api.jikan.moe/v4/seasons/\(year!)/\(season!)?page=\(page)"
 		
 		var urlString: String
 		
@@ -53,11 +53,11 @@ class NetworkManager
 				completion(.failure(error))
 				return
 			}
-
+			
 			guard let data = data else {
 				return
 			}
-
+			
 			do
 			{
 				let animeListResponse = try JSONDecoder().decode(AnimeListResponse.self, from: data)
@@ -70,7 +70,7 @@ class NetworkManager
 		}.resume()
 	}
 	
-	func fetchAnimeDetails(for id: Int, completion: @escaping (Result<AnimeResponse, Error>) -> Void)
+	func fetchAnimeDetails(for id: Int, completion: @escaping @Sendable (Result<AnimeResponse, Error>) -> Void)
 	{
 		let urlString = "https://api.jikan.moe/v4/anime/\(id)"
 		
@@ -88,11 +88,11 @@ class NetworkManager
 				completion(.failure(error))
 				return
 			}
-
+			
 			guard let data = data else {
 				return
 			}
-
+			
 			do
 			{
 				let animeResponse = try JSONDecoder().decode(AnimeResponse.self, from: data)
@@ -111,12 +111,12 @@ class NetworkManager
 		
 		switch result
 		{
-			case .success(let seasonsListResponse):
-				let season = seasonsListResponse.data.first?.seasons.last?.capitalizedFirstLetter
-				let year = seasonsListResponse.data.first?.year
-				return Season(string: season! + " " + String(year!), season: season, year: year)
-			case .failure(let error):
-				return Season(string: error.localizedDescription, season: "", year: 0)
+		case .success(let seasonsListResponse):
+			let season = seasonsListResponse.data.first?.seasons.last?.capitalizedFirstLetter
+			let year = seasonsListResponse.data.first?.year
+			return Season(string: season! + " " + String(year!), season: season, year: year)
+		case .failure(let error):
+			return Season(string: error.localizedDescription, season: "", year: 0)
 		}
 	}
 	
