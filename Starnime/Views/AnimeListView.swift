@@ -135,7 +135,10 @@ struct AnimeListView: View
 					{
 						ForEach(viewModel.animeList)
 						{ anime in
-							NavigationLink(destination: AnimeDetailsView(malId: anime.mal_id))
+							NavigationLink(
+								destination: AnimeDetailsView()
+									.environmentObject(AnimeDetailsViewModel(malId: anime.mal_id))
+							)
 							{
 								VStack
 								{

@@ -9,10 +9,8 @@ import SwiftUI
 
 struct AnimeDetailsView: View
 {
-	@State private var anime: Anime?
-	@State private var errorMessage: String?
-	let malId: Int
-
+	@EnvironmentObject var viewModel: AnimeDetailsViewModel
+	
 	var body: some View
 	{
 		ZStack
@@ -21,7 +19,7 @@ struct AnimeDetailsView: View
 			{
 				VStack
 				{
-					if let anime = anime
+					if let anime = viewModel.anime
 					{
 						VStack(spacing: 8)
 						{
@@ -80,7 +78,7 @@ struct AnimeDetailsView: View
 						
 						Link("MyAnimeList", destination: URL(string: anime.url)!)
 					}
-					else if let errorMessage = errorMessage
+					else if let errorMessage = viewModel.errorMessage
 					{
 						Text(errorMessage)
 							.foregroundColor(.red)
@@ -89,7 +87,7 @@ struct AnimeDetailsView: View
 				.padding(.horizontal, 8)
 			}
 			
-			if anime == nil && errorMessage == nil
+			if viewModel.anime == nil && viewModel.errorMessage == nil
 			{
 				ProgressView("Loading")
 					.frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -99,33 +97,19 @@ struct AnimeDetailsView: View
 		{
 			Task
 			{
-				await fetchAnime()
+				await viewModel.fetchAnime()
 			}
 		}
 		.refreshable
 		{
-			await fetchAnime()
+			await viewModel.fetchAnime()
 		}
 		.navigationTitle("Details")
-	}
-	
-	private func fetchAnime() async
-	{
-		errorMessage = nil
-		
-		do
-		{
-			let animeResponse = try await NetworkManager().fetchAnimeDetails(for: malId)
-			self.anime = animeResponse.data
-		}
-		catch
-		{
-			errorMessage = error.localizedDescription
-		}
 	}
 }
 
 #Preview
 {
-	AnimeDetailsView(malId: 54744)
+	AnimeDetailsView()
+		.environmentObject(AnimeDetailsViewModel(malId: 54744))
 }

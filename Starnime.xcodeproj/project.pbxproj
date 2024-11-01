@@ -11,12 +11,12 @@
 		5E2F5C7D2C747938007E9B2D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2F5C7C2C747938007E9B2D /* SettingsView.swift */; };
 		5E2F5C842C7491DC007E9B2D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5E2F5C832C7491DC007E9B2D /* Settings.bundle */; };
 		5E4CFC762C74735C0020CA33 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CFC752C74735C0020CA33 /* Settings.swift */; };
+		5E4FEAA02CD51AEA00630B38 /* AnimeDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4FEA9F2CD51AEA00630B38 /* AnimeDetailsViewModel.swift */; };
 		5E8C125A2C6F48AE001F3BB5 /* Seasons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8C12592C6F48AE001F3BB5 /* Seasons.swift */; };
 		5E94A3902C64B814006DF865 /* AnimeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E94A38F2C64B814006DF865 /* AnimeListView.swift */; };
 		5E94A3942C64CAB0006DF865 /* Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E94A3932C64CAB0006DF865 /* Anime.swift */; };
 		5E94A3972C64CB78006DF865 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E94A3962C64CB78006DF865 /* NetworkManager.swift */; };
 		5E94A3992C64CC56006DF865 /* AnimeDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E94A3982C64CC56006DF865 /* AnimeDetailsView.swift */; };
-		5EE1FCD22C673F8600DDAAD3 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE1FCD12C673F8600DDAAD3 /* StringExtension.swift */; };
 		5EE8F91B2C75DE490050E835 /* AnimeListView_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE8F91A2C75DE490050E835 /* AnimeListView_macOS.swift */; };
 		5EE8F9232C772C580050E835 /* AnimeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE8F9222C772C580050E835 /* AnimeListViewModel.swift */; };
 		5EFE438E2C64A0D800163C60 /* StarnimeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFE438D2C64A0D800163C60 /* StarnimeApp.swift */; };
@@ -50,12 +50,12 @@
 		5E2F5C7C2C747938007E9B2D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		5E2F5C832C7491DC007E9B2D /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		5E4CFC752C74735C0020CA33 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		5E4FEA9F2CD51AEA00630B38 /* AnimeDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeDetailsViewModel.swift; sourceTree = "<group>"; };
 		5E8C12592C6F48AE001F3BB5 /* Seasons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seasons.swift; sourceTree = "<group>"; };
 		5E94A38F2C64B814006DF865 /* AnimeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeListView.swift; sourceTree = "<group>"; };
 		5E94A3932C64CAB0006DF865 /* Anime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anime.swift; sourceTree = "<group>"; };
 		5E94A3962C64CB78006DF865 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		5E94A3982C64CC56006DF865 /* AnimeDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeDetailsView.swift; sourceTree = "<group>"; };
-		5EE1FCD12C673F8600DDAAD3 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		5EE8F91A2C75DE490050E835 /* AnimeListView_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeListView_macOS.swift; sourceTree = "<group>"; };
 		5EE8F9222C772C580050E835 /* AnimeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeListViewModel.swift; sourceTree = "<group>"; };
 		5EFE438A2C64A0D800163C60 /* Starnime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Starnime.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -143,14 +143,6 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
-		5EE1FCD02C673F6B00DDAAD3 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				5EE1FCD12C673F8600DDAAD3 /* StringExtension.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		5EE8F9192C75DD7B0050E835 /* macOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -163,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				5EE8F9222C772C580050E835 /* AnimeListViewModel.swift */,
+				5E4FEA9F2CD51AEA00630B38 /* AnimeDetailsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -191,7 +184,6 @@
 			isa = PBXGroup;
 			children = (
 				5EFE438D2C64A0D800163C60 /* StarnimeApp.swift */,
-				5EE1FCD02C673F6B00DDAAD3 /* Extensions */,
 				5E94A3922C64CA9B006DF865 /* Models */,
 				5E94A3952C64CB36006DF865 /* Networking */,
 				5E94A38E2C64B77B006DF865 /* Views */,
@@ -362,7 +354,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E94A3942C64CAB0006DF865 /* Anime.swift in Sources */,
-				5EE1FCD22C673F8600DDAAD3 /* StringExtension.swift in Sources */,
 				5EE8F9232C772C580050E835 /* AnimeListViewModel.swift in Sources */,
 				5E94A3902C64B814006DF865 /* AnimeListView.swift in Sources */,
 				5E94A3972C64CB78006DF865 /* NetworkManager.swift in Sources */,
@@ -372,6 +363,7 @@
 				5EE8F91B2C75DE490050E835 /* AnimeListView_macOS.swift in Sources */,
 				5E4CFC762C74735C0020CA33 /* Settings.swift in Sources */,
 				5EFE43902C64A0D800163C60 /* ContentView.swift in Sources */,
+				5E4FEAA02CD51AEA00630B38 /* AnimeDetailsViewModel.swift in Sources */,
 				5EFE438E2C64A0D800163C60 /* StarnimeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

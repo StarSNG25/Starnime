@@ -38,7 +38,7 @@ struct Anime: Codable, Identifiable
 	
 	var currSeason: String
 	{
-		guard let season = season?.capitalizedFirstLetter, let year = year
+		guard let season = season?.capitalized, let year = year
 		else
 		{
 			return ""

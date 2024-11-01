@@ -88,7 +88,7 @@ class NetworkManager
 		do
 		{
 			let seasonsListResponse = try await fetchSeasonsList()
-			let season = seasonsListResponse.data.first?.seasons.last?.capitalizedFirstLetter
+			let season = seasonsListResponse.data.first?.seasons.last?.capitalized
 			let year = seasonsListResponse.data.first?.year
 			return Season(string: season! + " " + String(year!), season: season, year: year)
 		}
