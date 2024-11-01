@@ -22,48 +22,45 @@ class AnimeListViewModel: ObservableObject
 	@Published var isUpcoming = false
 	
 	private var seenIDs = Set<Int>()
+	private var fetchTask: Task<Void, Never>?
 	
 	func fetchSeason() async
 	{
-		self.isLoading = true
+		fetchTask?.cancel()
 		
-		NetworkManager().fetchAnimeSeason(year: self.year, season: self.season, page: self.page)
-		{ result in
-			switch result
+		fetchTask = Task
+		{
+			isLoading = true
+			
+			defer
 			{
-				case .success(let animeListResponse):
-					DispatchQueue.main.async
-					{
-						let animeList = animeListResponse.data.filter
-						{ anime in
-							if self.seenIDs.contains(anime.mal_id)
-							{
-								return false
-							}
-							else
-							{
-								self.seenIDs.insert(anime.mal_id)
-								return true
-							}
-						}
-						self.animeList.append(contentsOf: animeList)
-						self.pagination = animeListResponse.pagination
-						
-						self.isUpcoming = self.season?.caseInsensitiveCompare("upcoming") == .orderedSame
-						if self.isUpcoming
-						{
-							self.animeList.removeAll(where: { $0.season != nil })
-						}
-					}
-				case .failure(let error):
-					DispatchQueue.main.async
-					{
-						self.errorMessage = error.localizedDescription
-					}
+				isLoading = false
 			}
-			DispatchQueue.main.async
+			
+			do
 			{
-				self.isLoading = false
+				let animeListResponse = try await NetworkManager().fetchAnimeSeason(year: year, season: season, page: page)
+				let animeList = animeListResponse.data.filter
+				{ anime in
+					guard !seenIDs.contains(anime.mal_id) else {
+						return false
+					}
+					
+					seenIDs.insert(anime.mal_id)
+					return true
+				}
+				self.animeList.append(contentsOf: animeList)
+				self.pagination = animeListResponse.pagination
+				
+				isUpcoming = season?.caseInsensitiveCompare("upcoming") == .orderedSame
+				if isUpcoming
+				{
+					self.animeList.removeAll(where: { $0.season != nil })
+				}
+			}
+			catch
+			{
+				self.errorMessage = error.localizedDescription
 			}
 		}
 	}

@@ -113,21 +113,14 @@ struct AnimeDetailsView: View
 	{
 		errorMessage = nil
 		
-		NetworkManager().fetchAnimeDetails(for: malId)
-		{ result in
-			switch result
-			{
-				case .success(let animeResponse):
-					DispatchQueue.main.async
-					{
-						self.anime = animeResponse.data
-					}
-				case .failure(let error):
-					DispatchQueue.main.async
-					{
-						self.errorMessage = error.localizedDescription
-					}
-			}
+		do
+		{
+			let animeResponse = try await NetworkManager().fetchAnimeDetails(for: malId)
+			self.anime = animeResponse.data
+		}
+		catch
+		{
+			errorMessage = error.localizedDescription
 		}
 	}
 }

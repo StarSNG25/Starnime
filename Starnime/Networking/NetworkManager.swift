@@ -10,6 +10,10 @@ import Foundation
 class NetworkManager
 {
 	private let session: URLSession
+	private var invalidURLError: NSError
+	{
+		return NSError(domain: "InvalidURL", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])
+	}
 	
 	init()
 	{
@@ -18,12 +22,8 @@ class NetworkManager
 		self.session = URLSession(configuration: config)
 	}
 	
-	func fetchAnimeSeason(year: Int?, season: String?, page: Int, completion: @escaping @Sendable (Result<AnimeListResponse, Error>) -> Void)
+	func fetchAnimeSeason(year: Int?, season: String?, page: Int) async throws -> AnimeListResponse
 	{
-		//		let urlString = year == nil || season == nil
-		//						? "https://api.jikan.moe/v4/seasons/now?page=\(page)"
-		//						: "https://api.jikan.moe/v4/seasons/\(year!)/\(season!)?page=\(page)"
-		
 		var urlString: String
 		
 		if year == nil && season == nil
@@ -40,106 +40,61 @@ class NetworkManager
 		}
 		
 		guard let url = URL(string: urlString) else {
-			return
+			throw invalidURLError
 		}
 		
 		var request = URLRequest(url: url)
 		request.cachePolicy = .reloadIgnoringLocalCacheData
 		
-		session.dataTask(with: request)
-		{ data, response, error in
-			if let error = error
-			{
-				completion(.failure(error))
-				return
-			}
-			
-			guard let data = data else {
-				return
-			}
-			
-			do
-			{
-				let animeListResponse = try JSONDecoder().decode(AnimeListResponse.self, from: data)
-				completion(.success(animeListResponse))
-			}
-			catch
-			{
-				completion(.failure(error))
-			}
-		}.resume()
+		let (data, _) = try await session.data(for: request)
+		let animeListResponse = try JSONDecoder().decode(AnimeListResponse.self, from: data)
+		return animeListResponse
 	}
 	
-	func fetchAnimeDetails(for id: Int, completion: @escaping @Sendable (Result<AnimeResponse, Error>) -> Void)
+	func fetchAnimeDetails(for id: Int) async throws -> AnimeResponse
 	{
 		let urlString = "https://api.jikan.moe/v4/anime/\(id)"
 		
 		guard let url = URL(string: urlString) else {
-			return
+			throw invalidURLError
 		}
 		
 		var request = URLRequest(url: url)
 		request.cachePolicy = .reloadIgnoringLocalCacheData
 		
-		session.dataTask(with: request)
-		{ data, response, error in
-			if let error = error
-			{
-				completion(.failure(error))
-				return
-			}
-			
-			guard let data = data else {
-				return
-			}
-			
-			do
-			{
-				let animeResponse = try JSONDecoder().decode(AnimeResponse.self, from: data)
-				completion(.success(animeResponse))
-			}
-			catch
-			{
-				completion(.failure(error))
-			}
-		}.resume()
+		let (data, _) = try await session.data(for: request)
+		let animeResponse = try JSONDecoder().decode(AnimeResponse.self, from: data)
+		return animeResponse
 	}
 	
-	func getLatestSeason() async -> Season
-	{
-		let result = await fetchSeasonsList()
-		
-		switch result
-		{
-		case .success(let seasonsListResponse):
-			let season = seasonsListResponse.data.first?.seasons.last?.capitalizedFirstLetter
-			let year = seasonsListResponse.data.first?.year
-			return Season(string: season! + " " + String(year!), season: season, year: year)
-		case .failure(let error):
-			return Season(string: error.localizedDescription, season: "", year: 0)
-		}
-	}
-	
-	func fetchSeasonsList() async -> Result<SeasonsListResponse, Error>
+	func fetchSeasonsList() async throws -> SeasonsListResponse
 	{
 		let urlString = "https://api.jikan.moe/v4/seasons"
 		
 		guard let url = URL(string: urlString) else {
-			return .failure(NSError(domain: "InvalidURL", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"]))
+			throw invalidURLError
 		}
 		
 		var request = URLRequest(url: url)
 		request.cachePolicy = .reloadIgnoringLocalCacheData
 		
+		let (data, _) = try await session.data(for: request)
+		let seasonsListResponse = try JSONDecoder().decode(SeasonsListResponse.self, from: data)
+		return seasonsListResponse
+	}
+	
+	func getLatestSeason() async -> Season
+	{
 		do
 		{
-			let (data, _) = try await session.data(for: request)
-			let seasonsListResponse = try JSONDecoder().decode(SeasonsListResponse.self, from: data)
-			return .success(seasonsListResponse)
+			let seasonsListResponse = try await fetchSeasonsList()
+			let season = seasonsListResponse.data.first?.seasons.last?.capitalizedFirstLetter
+			let year = seasonsListResponse.data.first?.year
+			return Season(string: season! + " " + String(year!), season: season, year: year)
 		}
 		catch
 		{
-			return .failure(error)
+			return Season(string: error.localizedDescription, season: "", year: 0)
 		}
 	}
 }
