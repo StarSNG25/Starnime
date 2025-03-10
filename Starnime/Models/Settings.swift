@@ -10,8 +10,12 @@ import SwiftUI
 
 class Settings: ObservableObject
 {
+	//Appearance
 	@AppStorage("isDarkMode") var isDarkMode: Bool = true
 	@AppStorage("titleLanguage") var titleLanguage: TitleLanguage = .default
+	
+	//Results
+	@AppStorage("hideNSFW") var hideNSFW: Bool = false
 }
 
 enum TitleLanguage: String, CaseIterable, Identifiable

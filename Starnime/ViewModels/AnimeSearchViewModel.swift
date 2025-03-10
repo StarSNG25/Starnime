@@ -1,25 +1,23 @@
 //
-//  AnimeListViewModel.swift
+//  AnimeSearchViewModel.swift
 //  Starnime
 //
-//  Created by Star_SNG on 2024/08/22.
+//  Created by Star_SNG on 2024/11/19.
 //
 
 import SwiftUI
 import Combine
 
 @MainActor
-final class AnimeListViewModel: ObservableObject
+final class AnimeSearchViewModel: ObservableObject
 {
+	@Published var searchText: String = ""
+	@Published var searchQuery: String = ""
 	@Published var animeList: [Anime] = []
 	@Published var pagination: Pagination?
-	@Published var latestSeason: Season?
 	@Published var errorMessage: String?
-	@Published var year: Int?
-	@Published var season: String?
 	@Published var page = 1
 	@Published var isLoading = false
-	@Published var isUpcoming = false
 	
 	private var seenIDs = Set<Int>()
 	private var fetchTask: Task<Void, Never>?
@@ -31,12 +29,14 @@ final class AnimeListViewModel: ObservableObject
 		lastHideNSFW = settings.hideNSFW
 	}
 	
-	func fetchSeason() async
+	func fetchSearch() async
 	{
 		fetchTask?.cancel()
 		
 		fetchTask = Task
 		{
+			if searchQuery.isEmpty { return }
+			
 			isLoading = true
 			
 			defer { isLoading = false }
@@ -44,7 +44,7 @@ final class AnimeListViewModel: ObservableObject
 			do
 			{
 				let animeListResponse = try await NetworkManager()
-					.fetchAnimeSeason(year: year, season: season, page: page, hideNSFW: settings.hideNSFW)
+					.fetchAnimeSearch(searchQuery: searchQuery, page: page, hideNSFW: settings.hideNSFW)
 				let animeList = animeListResponse.data.filter
 				{ anime in
 					guard !seenIDs.contains(anime.mal_id) else {
@@ -56,12 +56,6 @@ final class AnimeListViewModel: ObservableObject
 				}
 				self.animeList.append(contentsOf: animeList)
 				self.pagination = animeListResponse.pagination
-				
-				isUpcoming = season?.caseInsensitiveCompare("upcoming") == .orderedSame
-				if isUpcoming
-				{
-					self.animeList.removeAll(where: { $0.season != nil })
-				}
 			}
 			catch
 			{
@@ -89,7 +83,7 @@ final class AnimeListViewModel: ObservableObject
 		{
 			lastHideNSFW = settings.hideNSFW
 			resetPage()
-			await fetchSeason()
+			await fetchSearch()
 		}
 	}
 	

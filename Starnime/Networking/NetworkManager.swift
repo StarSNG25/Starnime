@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NetworkManager
+final class NetworkManager
 {
 	private let session: URLSession
 	private var invalidURLError: NSError
@@ -22,7 +22,7 @@ class NetworkManager
 		self.session = URLSession(configuration: config)
 	}
 	
-	func fetchAnimeSeason(year: Int?, season: String?, page: Int) async throws -> AnimeListResponse
+	func fetchAnimeSeason(year: Int?, season: String?, page: Int, hideNSFW: Bool) async throws -> AnimeListResponse
 	{
 		var urlString: String
 		
@@ -37,6 +37,11 @@ class NetworkManager
 		else
 		{
 			urlString = "https://api.jikan.moe/v4/seasons/\(year!)/\(season!)?page=\(page)"
+		}
+		
+		if hideNSFW
+		{
+			urlString += "&sfw"
 		}
 		
 		guard let url = URL(string: urlString) else {
@@ -65,6 +70,22 @@ class NetworkManager
 		let (data, _) = try await session.data(for: request)
 		let animeResponse = try JSONDecoder().decode(AnimeResponse.self, from: data)
 		return animeResponse
+	}
+	
+	func fetchAnimeSearch(searchQuery: String, page: Int, hideNSFW: Bool) async throws -> AnimeListResponse
+	{
+		let urlString = "https://api.jikan.moe/v4/anime?q=\(searchQuery)&page=\(page)" + (hideNSFW ? "&sfw" : "")
+		
+		guard let url = URL(string: urlString) else {
+			throw invalidURLError
+		}
+		
+		var request = URLRequest(url: url)
+		request.cachePolicy = .reloadIgnoringLocalCacheData
+		
+		let (data, _) = try await session.data(for: request)
+		let animeListResponse = try JSONDecoder().decode(AnimeListResponse.self, from: data)
+		return animeListResponse
 	}
 	
 	func fetchSeasonsList() async throws -> SeasonsListResponse

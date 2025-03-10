@@ -76,6 +76,11 @@ struct AnimeDetailsView: View
 							Text("Score: \(String(format: "%.2f", score))/10")
 						}
 						
+						if let rating = anime.rating
+						{
+							Text("Rating: \(rating)")
+						}
+						
 						Link("MyAnimeList", destination: URL(string: anime.url)!)
 					}
 					else if let errorMessage = viewModel.errorMessage

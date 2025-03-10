@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 @MainActor
-class AnimeDetailsViewModel: ObservableObject
+final class AnimeDetailsViewModel: ObservableObject
 {
 	@Published var anime: Anime?
 	@Published var errorMessage: String?

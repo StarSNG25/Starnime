@@ -10,8 +10,8 @@ import SwiftUI
 @main
 struct StarnimeApp: App
 {
-	@StateObject private var viewModel = AnimeListViewModel()
 	@StateObject private var settings = Settings()
+	@StateObject private var viewModel = AnimeListViewModel()
 	
 	var body: some Scene
 	{

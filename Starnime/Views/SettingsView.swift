@@ -26,6 +26,11 @@ struct SettingsView: View
 					}
 				}
 			}
+			
+			Section(header: Text("Results"))
+			{
+				Toggle("Hide NSFW", isOn: $settings.hideNSFW)
+			}
 		}
 		.navigationTitle("Settings")
 	}

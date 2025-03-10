@@ -19,6 +19,8 @@
 		5E94A3992C64CC56006DF865 /* AnimeDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E94A3982C64CC56006DF865 /* AnimeDetailsView.swift */; };
 		5EE8F91B2C75DE490050E835 /* AnimeListView_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE8F91A2C75DE490050E835 /* AnimeListView_macOS.swift */; };
 		5EE8F9232C772C580050E835 /* AnimeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE8F9222C772C580050E835 /* AnimeListViewModel.swift */; };
+		5EF33CAE2CEC98FC0046D61D /* AnimeSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF33CAD2CEC98FC0046D61D /* AnimeSearchView.swift */; };
+		5EF33CB02CEC990A0046D61D /* AnimeSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF33CAF2CEC990A0046D61D /* AnimeSearchViewModel.swift */; };
 		5EFE438E2C64A0D800163C60 /* StarnimeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFE438D2C64A0D800163C60 /* StarnimeApp.swift */; };
 		5EFE43902C64A0D800163C60 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFE438F2C64A0D800163C60 /* ContentView.swift */; };
 		5EFE43922C64A0D900163C60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EFE43912C64A0D900163C60 /* Assets.xcassets */; };
@@ -58,6 +60,8 @@
 		5E94A3982C64CC56006DF865 /* AnimeDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeDetailsView.swift; sourceTree = "<group>"; };
 		5EE8F91A2C75DE490050E835 /* AnimeListView_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeListView_macOS.swift; sourceTree = "<group>"; };
 		5EE8F9222C772C580050E835 /* AnimeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeListViewModel.swift; sourceTree = "<group>"; };
+		5EF33CAD2CEC98FC0046D61D /* AnimeSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeSearchView.swift; sourceTree = "<group>"; };
+		5EF33CAF2CEC990A0046D61D /* AnimeSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeSearchViewModel.swift; sourceTree = "<group>"; };
 		5EFE438A2C64A0D800163C60 /* Starnime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Starnime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EFE438D2C64A0D800163C60 /* StarnimeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarnimeApp.swift; sourceTree = "<group>"; };
 		5EFE438F2C64A0D800163C60 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -118,6 +122,7 @@
 			children = (
 				5E94A3982C64CC56006DF865 /* AnimeDetailsView.swift */,
 				5E94A38F2C64B814006DF865 /* AnimeListView.swift */,
+				5EF33CAD2CEC98FC0046D61D /* AnimeSearchView.swift */,
 				5E2F5C7C2C747938007E9B2D /* SettingsView.swift */,
 				5EE8F9192C75DD7B0050E835 /* macOS */,
 				5EFE438F2C64A0D800163C60 /* ContentView.swift */,
@@ -154,8 +159,9 @@
 		5EE8F9212C772C290050E835 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				5EE8F9222C772C580050E835 /* AnimeListViewModel.swift */,
 				5E4FEA9F2CD51AEA00630B38 /* AnimeDetailsViewModel.swift */,
+				5EE8F9222C772C580050E835 /* AnimeListViewModel.swift */,
+				5EF33CAF2CEC990A0046D61D /* AnimeSearchViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -356,6 +362,7 @@
 				5E94A3942C64CAB0006DF865 /* Anime.swift in Sources */,
 				5EE8F9232C772C580050E835 /* AnimeListViewModel.swift in Sources */,
 				5E94A3902C64B814006DF865 /* AnimeListView.swift in Sources */,
+				5EF33CB02CEC990A0046D61D /* AnimeSearchViewModel.swift in Sources */,
 				5E94A3972C64CB78006DF865 /* NetworkManager.swift in Sources */,
 				5E8C125A2C6F48AE001F3BB5 /* Seasons.swift in Sources */,
 				5E2F5C7D2C747938007E9B2D /* SettingsView.swift in Sources */,
@@ -365,6 +372,7 @@
 				5EFE43902C64A0D800163C60 /* ContentView.swift in Sources */,
 				5E4FEAA02CD51AEA00630B38 /* AnimeDetailsViewModel.swift in Sources */,
 				5EFE438E2C64A0D800163C60 /* StarnimeApp.swift in Sources */,
+				5EF33CAE2CEC98FC0046D61D /* AnimeSearchView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

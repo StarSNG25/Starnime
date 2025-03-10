@@ -8,6 +8,12 @@
 	<array>
 		<dict>
 			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Appearance</string>
+		</dict>
+		<dict>
+			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 			<key>Title</key>
 			<string>Dark Mode</string>
@@ -37,6 +43,22 @@
 				<string>Japanese</string>
 				<string>English</string>
 			</array>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Results</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Hide NSFW</string>
+			<key>Key</key>
+			<string>hideNSFW</string>
+			<key>DefaultValue</key>
+			<false/>
 		</dict>
 	</array>
 </dict>
