@@ -35,6 +35,14 @@ struct AnimeListView: View
 			viewModel.resetPage()
 			await viewModel.fetchSeason()
 		}
+		.onChange(of: settings.hideNSFW)
+		{
+			Task
+			{
+				viewModel.resetPage()
+				await viewModel.fetchSeason()
+			}
+		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
 	}
 	
