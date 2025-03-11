@@ -9,6 +9,7 @@ import Foundation
 
 final class NetworkManager
 {
+	private let hideNSFWTag = "&sfw"
 	private let session: URLSession
 	private var invalidURLError: NSError
 	{
@@ -41,7 +42,7 @@ final class NetworkManager
 		
 		if hideNSFW
 		{
-			urlString += "&sfw"
+			urlString += hideNSFWTag
 		}
 		
 		guard let url = URL(string: urlString) else {
@@ -74,7 +75,7 @@ final class NetworkManager
 	
 	func fetchAnimeSearch(searchQuery: String, page: Int, hideNSFW: Bool) async throws -> AnimeListResponse
 	{
-		let urlString = "https://api.jikan.moe/v4/anime?q=\(searchQuery)&page=\(page)" + (hideNSFW ? "&sfw" : "")
+		let urlString = "https://api.jikan.moe/v4/anime?q=\(searchQuery)&page=\(page)" + (hideNSFW ? hideNSFWTag : "")
 		
 		guard let url = URL(string: urlString) else {
 			throw invalidURLError
