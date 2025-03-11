@@ -23,11 +23,6 @@ struct AnimeSearchView: View
 		.onAppear
 		{
 			isSearchFieldFocused = viewModel.searchQuery.isEmpty ? true : false
-			
-			Task
-			{
-				await viewModel.checkHideNSFWChange()
-			}
 		}
 		.onTapGesture
 		{
@@ -39,6 +34,14 @@ struct AnimeSearchView: View
 			isSearchFieldFocused = viewModel.searchQuery.isEmpty ? true : false
 			viewModel.resetPage()
 			await viewModel.fetchSearch()
+		}
+		.onChange(of: settings.hideNSFW)
+		{
+			Task
+			{
+				viewModel.resetPage()
+				await viewModel.fetchSearch()
+			}
 		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
 	}

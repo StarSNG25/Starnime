@@ -27,7 +27,6 @@ struct AnimeListView: View
 			{
 				await viewModel.fetchSeason()
 				viewModel.latestSeason = await NetworkManager().getLatestSeason()
-//				await viewModel.checkHideNSFWChange()
 			}
 		}
 		.refreshable

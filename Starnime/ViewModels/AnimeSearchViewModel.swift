@@ -22,12 +22,6 @@ final class AnimeSearchViewModel: ObservableObject
 	private var seenIDs = Set<Int>()
 	private var fetchTask: Task<Void, Never>?
 	private var settings = Settings()
-	private var lastHideNSFW = false
-	
-	init()
-	{
-		lastHideNSFW = settings.hideNSFW
-	}
 	
 	func fetchSearch() async
 	{
@@ -74,16 +68,6 @@ final class AnimeSearchViewModel: ObservableObject
 				return anime.title_japanese ?? anime.title
 			case .english:
 				return anime.title_english ?? anime.title
-		}
-	}
-	
-	func checkHideNSFWChange() async
-	{
-		if lastHideNSFW != settings.hideNSFW
-		{
-			lastHideNSFW = settings.hideNSFW
-			resetPage()
-			await fetchSearch()
 		}
 	}
 	
