@@ -34,6 +34,14 @@ struct AnimeListView_macOS: View
 			viewModel.resetPage()
 			await viewModel.fetchSeason()
 		}
+		.onChange(of: settings.hideNSFW)
+		{
+			Task
+			{
+				viewModel.resetPage()
+				await viewModel.fetchSeason()
+			}
+		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
 		.padding()
 	}
