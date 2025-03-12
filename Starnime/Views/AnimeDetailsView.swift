@@ -85,8 +85,11 @@ struct AnimeDetailsView: View
 					}
 					else if let errorMessage = viewModel.errorMessage
 					{
-						Text(errorMessage)
-							.foregroundColor(.red)
+						CenteredContainer
+						{
+							Text(errorMessage)
+								.foregroundColor(.red)
+						}
 					}
 				}
 				.padding(.horizontal, 8)
@@ -95,7 +98,6 @@ struct AnimeDetailsView: View
 			if viewModel.anime == nil && viewModel.errorMessage == nil
 			{
 				ProgressView("Loading")
-					.frame(maxWidth: .infinity, maxHeight: .infinity)
 			}
 		}
 		.onAppear

@@ -171,15 +171,16 @@ struct AnimeSearchView: View
 			}
 			else if let errorMessage = viewModel.errorMessage
 			{
-				Text(errorMessage)
-					.foregroundColor(.red)
+				CenteredContainer
+				{
+					Text(errorMessage)
+						.foregroundColor(.red)
+				}
 			}
 			else if !viewModel.searchQuery.isEmpty
 			{
-				ZStack
+				CenteredContainer
 				{
-					Spacer()
-						.containerRelativeFrame([.horizontal, .vertical])
 					if !viewModel.isLoading && viewModel.animeList.isEmpty
 					{
 						Text("No results found")
@@ -192,10 +193,8 @@ struct AnimeSearchView: View
 			}
 			else
 			{
-				ZStack
+				CenteredContainer
 				{
-					Spacer()
-						.containerRelativeFrame([.horizontal, .vertical])
 					Text("Search anime...")
 				}
 			}

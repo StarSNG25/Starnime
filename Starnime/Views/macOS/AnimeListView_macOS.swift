@@ -243,15 +243,16 @@ struct AnimeListView_macOS: View
 			}
 			else if let errorMessage = viewModel.errorMessage
 			{
-				Text(errorMessage)
-					.foregroundColor(.red)
+				CenteredContainer
+				{
+					Text(errorMessage)
+						.foregroundColor(.red)
+				}
 			}
 			else
 			{
-				ZStack
+				CenteredContainer
 				{
-					Spacer()
-						.containerRelativeFrame([.horizontal, .vertical])
 					ProgressView("Loading")
 				}
 			}
