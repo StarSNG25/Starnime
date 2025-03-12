@@ -85,11 +85,7 @@ struct AnimeDetailsView: View
 					}
 					else if let errorMessage = viewModel.errorMessage
 					{
-						CenteredContainer
-						{
-							Text(errorMessage)
-								.foregroundColor(.red)
-						}
+						ErrorMessageView(errorMessage: errorMessage)
 					}
 				}
 				.padding(.horizontal, 8)

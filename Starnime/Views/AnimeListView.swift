@@ -242,11 +242,7 @@ struct AnimeListView: View
 			}
 			else if let errorMessage = viewModel.errorMessage
 			{
-				CenteredContainer
-				{
-					Text(errorMessage)
-						.foregroundColor(.red)
-				}
+				ErrorMessageView(errorMessage: errorMessage)
 			}
 			else
 			{
