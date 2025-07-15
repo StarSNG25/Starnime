@@ -24,10 +24,6 @@ struct AnimeSearchView: View
 		{
 			isSearchFieldFocused = viewModel.searchQuery.isEmpty ? true : false
 		}
-		.onTapGesture
-		{
-			isSearchFieldFocused = false
-		}
 		.refreshable
 		{
 			viewModel.searchText = viewModel.searchQuery
@@ -44,6 +40,7 @@ struct AnimeSearchView: View
 			}
 		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
+		.navigationTitle("Search")
 	}
 	
 	private var header: some View
@@ -52,45 +49,52 @@ struct AnimeSearchView: View
 		{
 			HStack
 			{
-				NavigationLink(destination: SettingsView())
+				ZStack
 				{
-					Image(systemName: "gear")
-						.font(.title)
+					Button(action:
+					{
+						isSearchFieldFocused = false
+					})
+					{
+						Image(systemName: "keyboard.chevron.compact.down")
+							.font(.title)
+					}
+					.frame(alignment: .center)
+					.opacity(isSearchFieldFocused ? 1 : 0)
+					.scaleEffect(isSearchFieldFocused ? 1 : 0)
+					.zIndex(isSearchFieldFocused ? 1 : 0)
+					
+					NavigationLink(destination: SettingsView())
+					{
+						Image(systemName: "gear")
+							.font(.title)
+					}
+					.frame(alignment: .leading)
+					.opacity(isSearchFieldFocused ? 0 : 1)
+					.scaleEffect(isSearchFieldFocused ? 0 : 1)
+					.zIndex(isSearchFieldFocused ? 0 : 1)
 				}
-				.frame(maxWidth: .infinity, alignment: .leading)
+				.frame(width: 32)
+				.animation(.easeInOut, value: isSearchFieldFocused)
 				
-//				Text(!viewModel.searchText.isEmpty ? viewModel.searchText : "Search Anime")
-				Text("Search Anime")
-					.font(.title)
-					.fontWeight(.bold)
-					.fixedSize()
-					.frame(maxWidth: .infinity)
-				
-				Text("")
-					.frame(maxWidth: .infinity, alignment: .trailing)
+				TextField("Search", text: $viewModel.searchText)
+					.focused($isSearchFieldFocused)
+					.textFieldStyle(RoundedBorderTextFieldStyle())
+					.background(
+						RoundedRectangle(cornerRadius: 4)
+							.stroke(.accent, lineWidth: 2)
+					)
+					.onSubmit
+					{
+						Task
+						{
+							viewModel.resetPage()
+							viewModel.searchQuery = viewModel.searchText
+							await viewModel.fetchSearch()
+						}
+					}
 			}
 			.padding(.bottom, 1)
-//			.searchable(
-//				text: $viewModel.searchText,
-//				placement: .navigationBarDrawer(displayMode: .automatic)
-//			)
-			
-			TextField("Search", text: $viewModel.searchText)
-				.focused($isSearchFieldFocused)
-				.textFieldStyle(RoundedBorderTextFieldStyle())
-				.background(
-					RoundedRectangle(cornerRadius: 4)
-						.stroke(.accent, lineWidth: 2)
-				)
-				.onSubmit
-				{
-					Task
-					{
-						viewModel.resetPage()
-						viewModel.searchQuery = viewModel.searchText
-						await viewModel.fetchSearch()
-					}
-				}
 		}
 		.padding(.horizontal, 8)
 	}
