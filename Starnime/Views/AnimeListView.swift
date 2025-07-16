@@ -12,10 +12,11 @@ struct AnimeListView: View
 	@EnvironmentObject var viewModel: AnimeListViewModel
 	@EnvironmentObject var settings: Settings
 	@StateObject private var animeSearchViewModel = AnimeSearchViewModel()
+	@State private var isFirstLaunch = true
 	
 	var body: some View
 	{
-		NavigationStack
+		VStack
 		{
 			header
 			navSeason
@@ -23,10 +24,20 @@ struct AnimeListView: View
 		}
 		.onAppear
 		{
-			Task
+			if isFirstLaunch
 			{
-				await viewModel.fetchSeason()
-				viewModel.latestSeason = await NetworkManager().getLatestSeason()
+				Task
+				{
+					await viewModel.fetchSeason()
+					viewModel.latestSeason = await NetworkManager().getLatestSeason()
+				}
+				isFirstLaunch = false
+			}
+			else
+			{
+				animeSearchViewModel.resetPage()
+				animeSearchViewModel.searchText = ""
+				animeSearchViewModel.searchQuery = ""
 			}
 		}
 		.refreshable
@@ -257,7 +268,10 @@ struct AnimeListView: View
 
 #Preview
 {
-	AnimeListView()
-		.environmentObject(AnimeListViewModel())
-		.environmentObject(Settings())
+	NavigationStack
+	{
+		AnimeListView()
+	}
+	.environmentObject(AnimeListViewModel())
+	.environmentObject(Settings())
 }

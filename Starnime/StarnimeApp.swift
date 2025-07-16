@@ -17,17 +17,17 @@ struct StarnimeApp: App
 	{
 		WindowGroup
 		{
-			#if os(macOS)
-				AnimeListView_macOS()
-					.environmentObject(viewModel)
-					.environmentObject(settings)
-					.preferredColorScheme(settings.isDarkMode ? .dark : .light)
-			#else
-				AnimeListView()
-					.environmentObject(viewModel)
-					.environmentObject(settings)
-					.preferredColorScheme(settings.isDarkMode ? .dark : .light)
-			#endif
+			NavigationStack
+			{
+				#if os(macOS)
+					AnimeListView_macOS()
+				#else
+					AnimeListView()
+				#endif
+			}
+			.environmentObject(viewModel)
+			.environmentObject(settings)
+			.preferredColorScheme(settings.isDarkMode ? .dark : .light)
 		}
 	}
 }

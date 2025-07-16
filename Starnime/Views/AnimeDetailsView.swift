@@ -113,6 +113,9 @@ struct AnimeDetailsView: View
 
 #Preview
 {
-	AnimeDetailsView()
-		.environmentObject(AnimeDetailsViewModel(malId: 54744))
+	NavigationStack
+	{
+		AnimeDetailsView()
+	}
+	.environmentObject(AnimeDetailsViewModel(malId: 54744))
 }

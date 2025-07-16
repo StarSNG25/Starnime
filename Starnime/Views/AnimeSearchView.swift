@@ -15,7 +15,7 @@ struct AnimeSearchView: View
 	
 	var body: some View
 	{
-		NavigationStack
+		VStack
 		{
 			header
 			list
@@ -59,7 +59,6 @@ struct AnimeSearchView: View
 						Image(systemName: "keyboard.chevron.compact.down")
 							.font(.title)
 					}
-					.frame(alignment: .center)
 					.opacity(isSearchFieldFocused ? 1 : 0)
 					.scaleEffect(isSearchFieldFocused ? 1 : 0)
 					.zIndex(isSearchFieldFocused ? 1 : 0)
@@ -69,12 +68,11 @@ struct AnimeSearchView: View
 						Image(systemName: "gear")
 							.font(.title)
 					}
-					.frame(alignment: .leading)
 					.opacity(isSearchFieldFocused ? 0 : 1)
 					.scaleEffect(isSearchFieldFocused ? 0 : 1)
 					.zIndex(isSearchFieldFocused ? 0 : 1)
 				}
-				.frame(width: 32)
+				.frame(width: 32, alignment: .center)
 				.animation(.easeInOut, value: isSearchFieldFocused)
 				
 				TextField("Search", text: $viewModel.searchText)
@@ -204,7 +202,10 @@ struct AnimeSearchView: View
 
 #Preview
 {
-	AnimeSearchView()
-		.environmentObject(AnimeSearchViewModel())
-		.environmentObject(Settings())
+	NavigationStack
+	{
+		AnimeSearchView()
+	}
+	.environmentObject(AnimeSearchViewModel())
+	.environmentObject(Settings())
 }
