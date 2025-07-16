@@ -16,11 +16,43 @@ struct AnimeListView: View
 	
 	var body: some View
 	{
-		VStack
+		list
+		.navigationTitle("Seasonal Anime")
+		.navigationBarTitleDisplayMode(.inline)
+		.toolbar
 		{
-			header
-			navSeason
-			list
+			ToolbarItem(placement: .navigationBarLeading)
+			{
+				NavigationLink(destination: SettingsView())
+				{
+					Image(systemName: "gear")
+						.font(.title2)
+				}
+			}
+			
+			ToolbarItem(placement: .principal)
+			{
+				Text("Seasonal Anime")
+					.font(.title)
+					.fontWeight(.bold)
+			}
+			
+			ToolbarItem(placement: .navigationBarTrailing)
+			{
+				NavigationLink(
+					destination: AnimeSearchView()
+						.environmentObject(animeSearchViewModel)
+				)
+				{
+					Image(systemName: "magnifyingglass")
+						.font(.title2)
+				}
+			}
+			
+			ToolbarItem(placement: .bottomBar)
+			{
+				navSeason
+			}
 		}
 		.onAppear
 		{
@@ -54,37 +86,6 @@ struct AnimeListView: View
 			}
 		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
-	}
-	
-	private var header: some View
-	{
-		HStack
-		{
-			NavigationLink(destination: SettingsView())
-			{
-				Image(systemName: "gear")
-					.font(.title)
-			}
-			.frame(maxWidth: .infinity, alignment: .leading)
-			
-			Text("Seasonal Anime")
-				.font(.title)
-				.fontWeight(.bold)
-				.fixedSize()
-				.frame(maxWidth: .infinity)
-			
-			NavigationLink(
-				destination: AnimeSearchView()
-					.environmentObject(animeSearchViewModel)
-			)
-			{
-				Image(systemName: "magnifyingglass")
-					.font(.title)
-			}
-			.frame(maxWidth: .infinity, alignment: .trailing)
-		}
-		.padding(.horizontal, 8)
-		.padding(.bottom, 1)
 	}
 	
 	private var navSeason: some View
@@ -173,7 +174,6 @@ struct AnimeListView: View
 					.frame(maxWidth: .infinity, alignment: .trailing)
 			}
 		}
-		.padding(.horizontal, 8)
 	}
 	
 	private var list: some View
