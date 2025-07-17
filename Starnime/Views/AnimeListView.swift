@@ -5,6 +5,7 @@
 //  Created by Star_SNG on 2024/08/08.
 //
 
+#if !os(macOS)
 import SwiftUI
 
 struct AnimeListView: View
@@ -97,7 +98,7 @@ struct AnimeListView: View
 				let currSeason = viewModel.animeList[animeIndex].currSeason
 				let nextSeason = viewModel.animeList[animeIndex].nextSeason
 				let prevSeason = viewModel.animeList[animeIndex].prevSeason
-			
+				
 				Button(action: {
 					Task
 					{
@@ -275,3 +276,4 @@ struct AnimeListView: View
 	.environmentObject(AnimeListViewModel())
 	.environmentObject(Settings())
 }
+#endif

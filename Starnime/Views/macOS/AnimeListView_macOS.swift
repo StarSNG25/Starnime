@@ -5,17 +5,26 @@
 //  Created by Star_SNG on 2024/08/21.
 //
 
+#if os(macOS)
 import SwiftUI
+
+enum NavDestination: Hashable
+{
+	case settings
+	case search
+	case details(malId: Int)
+}
 
 struct AnimeListView_macOS: View
 {
 	@EnvironmentObject var viewModel: AnimeListViewModel
 	@EnvironmentObject var settings: Settings
+	@EnvironmentObject var navigationManager: NavigationManager
 	@StateObject private var animeSearchViewModel = AnimeSearchViewModel()
 	
 	var body: some View
 	{
-		NavigationStack
+		VStack
 		{
 			header
 			navSeason
@@ -42,6 +51,29 @@ struct AnimeListView_macOS: View
 				await viewModel.fetchSeason()
 			}
 		}
+		.onChange(of: navigationManager.path)
+		{
+			if navigationManager.path.isEmpty
+			{
+				animeSearchViewModel.resetPage()
+				animeSearchViewModel.searchText = ""
+				animeSearchViewModel.searchQuery = ""
+			}
+		}
+		.navigationDestination(for: NavDestination.self)
+		{ destination in
+			switch destination
+			{
+			case .settings:
+				SettingsView()
+			case .search:
+				AnimeSearchView()
+					.environmentObject(animeSearchViewModel)
+			case .details(let malId):
+				AnimeDetailsView()
+					.environmentObject(AnimeDetailsViewModel(malId: malId))
+			}
+		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
 		.padding()
 	}
@@ -50,7 +82,7 @@ struct AnimeListView_macOS: View
 	{
 		HStack
 		{
-			NavigationLink(destination: SettingsView())
+			NavigationLink(value: NavDestination.settings)
 			{
 				Image(systemName: "gear")
 					.font(.title)
@@ -63,10 +95,7 @@ struct AnimeListView_macOS: View
 				.fixedSize()
 				.frame(maxWidth: .infinity)
 			
-			NavigationLink(
-				destination: AnimeSearchView()
-					.environmentObject(animeSearchViewModel)
-			)
+			NavigationLink(value: NavDestination.search)
 			{
 				Image(systemName: "magnifyingglass")
 					.font(.title)
@@ -174,10 +203,7 @@ struct AnimeListView_macOS: View
 				{
 					ForEach(viewModel.animeList)
 					{ anime in
-						NavigationLink(
-							destination: AnimeDetailsView()
-								.environmentObject(AnimeDetailsViewModel(malId: anime.mal_id))
-						)
+						NavigationLink(value: NavDestination.details(malId: anime.mal_id))
 						{
 							VStack
 							{
@@ -259,7 +285,12 @@ struct AnimeListView_macOS: View
 
 #Preview
 {
-	AnimeListView_macOS()
-		.environmentObject(AnimeListViewModel())
-		.environmentObject(Settings())
+	NavigationStack
+	{
+		AnimeListView_macOS()
+	}
+	.environmentObject(AnimeListViewModel())
+	.environmentObject(Settings())
+	.environmentObject(NavigationManager())
 }
+#endif

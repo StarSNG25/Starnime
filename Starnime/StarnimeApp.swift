@@ -12,12 +12,13 @@ struct StarnimeApp: App
 {
 	@StateObject private var settings = Settings()
 	@StateObject private var viewModel = AnimeListViewModel()
+	@StateObject private var navigationManager = NavigationManager()
 	
 	var body: some Scene
 	{
 		WindowGroup
 		{
-			NavigationStack
+			NavigationStack(path: $navigationManager.path)
 			{
 				#if os(macOS)
 					AnimeListView_macOS()
@@ -27,6 +28,7 @@ struct StarnimeApp: App
 			}
 			.environmentObject(viewModel)
 			.environmentObject(settings)
+			.environmentObject(navigationManager)
 			.preferredColorScheme(settings.isDarkMode ? .dark : .light)
 		}
 	}

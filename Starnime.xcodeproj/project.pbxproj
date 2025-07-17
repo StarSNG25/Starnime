@@ -21,6 +21,7 @@
 		5E94A3992C64CC56006DF865 /* AnimeDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E94A3982C64CC56006DF865 /* AnimeDetailsView.swift */; };
 		5EE8F91B2C75DE490050E835 /* AnimeListView_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE8F91A2C75DE490050E835 /* AnimeListView_macOS.swift */; };
 		5EE8F9232C772C580050E835 /* AnimeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE8F9222C772C580050E835 /* AnimeListViewModel.swift */; };
+		5EF28FC02E28F01A00B9A4D9 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF28FBF2E28F01A00B9A4D9 /* NavigationManager.swift */; };
 		5EF33CAE2CEC98FC0046D61D /* AnimeSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF33CAD2CEC98FC0046D61D /* AnimeSearchView.swift */; };
 		5EF33CB02CEC990A0046D61D /* AnimeSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF33CAF2CEC990A0046D61D /* AnimeSearchViewModel.swift */; };
 		5EFE438E2C64A0D800163C60 /* StarnimeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFE438D2C64A0D800163C60 /* StarnimeApp.swift */; };
@@ -64,6 +65,7 @@
 		5E94A3982C64CC56006DF865 /* AnimeDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeDetailsView.swift; sourceTree = "<group>"; };
 		5EE8F91A2C75DE490050E835 /* AnimeListView_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeListView_macOS.swift; sourceTree = "<group>"; };
 		5EE8F9222C772C580050E835 /* AnimeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeListViewModel.swift; sourceTree = "<group>"; };
+		5EF28FBF2E28F01A00B9A4D9 /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
 		5EF33CAD2CEC98FC0046D61D /* AnimeSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeSearchView.swift; sourceTree = "<group>"; };
 		5EF33CAF2CEC990A0046D61D /* AnimeSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeSearchViewModel.swift; sourceTree = "<group>"; };
 		5EFE438A2C64A0D800163C60 /* Starnime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Starnime.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,12 +156,13 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		5E94A3952C64CB36006DF865 /* Networking */ = {
+		5E94A3952C64CB36006DF865 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
 				5E94A3962C64CB78006DF865 /* NetworkManager.swift */,
+				5EF28FBF2E28F01A00B9A4D9 /* NavigationManager.swift */,
 			);
-			path = Networking;
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		5EE8F9192C75DD7B0050E835 /* macOS */ = {
@@ -205,7 +208,7 @@
 			children = (
 				5EFE438D2C64A0D800163C60 /* StarnimeApp.swift */,
 				5E94A3922C64CA9B006DF865 /* Models */,
-				5E94A3952C64CB36006DF865 /* Networking */,
+				5E94A3952C64CB36006DF865 /* Managers */,
 				5E94A38E2C64B77B006DF865 /* Views */,
 				5EE8F9212C772C290050E835 /* ViewModels */,
 				5E80F04B2C7595930082C2CA /* Storyboards */,
@@ -305,7 +308,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1540;
-				LastUpgradeCheck = 1610;
+				LastUpgradeCheck = 1640;
 				TargetAttributes = {
 					5EFE43892C64A0D800163C60 = {
 						CreatedOnToolsVersion = 15.4;
@@ -384,6 +387,7 @@
 				5EE8F91B2C75DE490050E835 /* AnimeListView_macOS.swift in Sources */,
 				5E4CFC762C74735C0020CA33 /* Settings.swift in Sources */,
 				5EFE43902C64A0D800163C60 /* ContentView.swift in Sources */,
+				5EF28FC02E28F01A00B9A4D9 /* NavigationManager.swift in Sources */,
 				5E40B23B2D8182C400651E29 /* ErrorMessageView.swift in Sources */,
 				5E4FEAA02CD51AEA00630B38 /* AnimeDetailsViewModel.swift in Sources */,
 				5E40B2392D817D5B00651E29 /* CenteredContainer.swift in Sources */,
@@ -461,6 +465,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = CLP4UXNA62;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -524,6 +529,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = CLP4UXNA62;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -554,7 +560,6 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Starnime/Preview Content\"";
-				DEVELOPMENT_TEAM = CLP4UXNA62;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -597,7 +602,6 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Starnime/Preview Content\"";
-				DEVELOPMENT_TEAM = CLP4UXNA62;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -636,7 +640,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = CLP4UXNA62;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
 				MACOSX_DEPLOYMENT_TARGET = 15.1;
@@ -659,7 +662,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = CLP4UXNA62;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
 				MACOSX_DEPLOYMENT_TARGET = 15.1;
@@ -681,7 +683,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = CLP4UXNA62;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
 				MACOSX_DEPLOYMENT_TARGET = 15.1;
@@ -703,7 +704,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = CLP4UXNA62;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
 				MACOSX_DEPLOYMENT_TARGET = 15.1;
