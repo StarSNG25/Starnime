@@ -11,7 +11,7 @@ import SwiftUI
 struct StarnimeApp: App
 {
 	@StateObject private var settings = Settings()
-	@StateObject private var viewModel = AnimeListViewModel()
+	@StateObject private var viewModel = AnimeSeasonalViewModel()
 	@StateObject private var navigationManager = NavigationManager()
 	
 	var body: some Scene
@@ -21,9 +21,9 @@ struct StarnimeApp: App
 			NavigationStack(path: $navigationManager.path)
 			{
 				#if os(macOS)
-					AnimeListView_macOS()
+					AnimeSeasonalView_macOS()
 				#else
-					AnimeListView()
+					AnimeSeasonalView()
 				#endif
 			}
 			.environmentObject(viewModel)

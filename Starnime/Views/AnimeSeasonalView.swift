@@ -8,12 +8,12 @@
 #if !os(macOS)
 import SwiftUI
 
-struct AnimeListView: View
+struct AnimeSeasonalView: View
 {
-	@EnvironmentObject var viewModel: AnimeListViewModel
+	@EnvironmentObject var viewModel: AnimeSeasonalViewModel
 	@EnvironmentObject var settings: Settings
+	@EnvironmentObject var navigationManager: NavigationManager
 	@StateObject private var animeSearchViewModel = AnimeSearchViewModel()
-	@State private var isFirstLaunch = true
 	
 	var body: some View
 	{
@@ -24,7 +24,7 @@ struct AnimeListView: View
 		{
 			ToolbarItem(placement: .navigationBarLeading)
 			{
-				NavigationLink(destination: SettingsView())
+				NavigationLink(value: SeasonalNavigationDestination.settings)
 				{
 					Image(systemName: "gear")
 						.font(.title2)
@@ -40,10 +40,7 @@ struct AnimeListView: View
 			
 			ToolbarItem(placement: .navigationBarTrailing)
 			{
-				NavigationLink(
-					destination: AnimeSearchView()
-						.environmentObject(animeSearchViewModel)
-				)
+				NavigationLink(value: SeasonalNavigationDestination.search )
 				{
 					Image(systemName: "magnifyingglass")
 						.font(.title2)
@@ -57,20 +54,10 @@ struct AnimeListView: View
 		}
 		.onAppear
 		{
-			if isFirstLaunch
+			Task
 			{
-				Task
-				{
-					await viewModel.fetchSeason()
-					viewModel.latestSeason = await NetworkManager().getLatestSeason()
-				}
-				isFirstLaunch = false
-			}
-			else
-			{
-				animeSearchViewModel.resetPage()
-				animeSearchViewModel.searchText = ""
-				animeSearchViewModel.searchQuery = ""
+				await viewModel.fetchSeason()
+				viewModel.latestSeason = await NetworkManager().getLatestSeason()
 			}
 		}
 		.refreshable
@@ -84,6 +71,29 @@ struct AnimeListView: View
 			{
 				viewModel.resetPage()
 				await viewModel.fetchSeason()
+			}
+		}
+		.onChange(of: navigationManager.path)
+		{
+			if navigationManager.path.isEmpty
+			{
+				animeSearchViewModel.resetPage()
+				animeSearchViewModel.searchText = ""
+				animeSearchViewModel.searchQuery = ""
+			}
+		}
+		.navigationDestination(for: SeasonalNavigationDestination.self)
+		{ destination in
+			switch destination
+			{
+				case .settings:
+					SettingsView()
+				case .search:
+					AnimeSearchView()
+						.environmentObject(animeSearchViewModel)
+				case .details(let malId):
+					AnimeDetailsView()
+						.environmentObject(AnimeDetailsViewModel(malId: malId))
 			}
 		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -187,10 +197,7 @@ struct AnimeListView: View
 				{
 					ForEach(viewModel.animeList)
 					{ anime in
-						NavigationLink(
-							destination: AnimeDetailsView()
-								.environmentObject(AnimeDetailsViewModel(malId: anime.mal_id))
-						)
+						NavigationLink(value: SeasonalNavigationDestination.details(malId: anime.mal_id))
 						{
 							VStack
 							{
@@ -271,9 +278,10 @@ struct AnimeListView: View
 {
 	NavigationStack
 	{
-		AnimeListView()
+		AnimeSeasonalView()
 	}
-	.environmentObject(AnimeListViewModel())
+	.environmentObject(AnimeSeasonalViewModel())
 	.environmentObject(Settings())
+	.environmentObject(NavigationManager())
 }
 #endif

@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 @MainActor
-final class AnimeListViewModel: ObservableObject
+final class AnimeSeasonalViewModel: ObservableObject
 {
 	@Published var animeList: [Anime] = []
 	@Published var pagination: Pagination?

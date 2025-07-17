@@ -15,13 +15,14 @@
 		5E4CFC762C74735C0020CA33 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4CFC752C74735C0020CA33 /* Settings.swift */; };
 		5E4FEAA02CD51AEA00630B38 /* AnimeDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4FEA9F2CD51AEA00630B38 /* AnimeDetailsViewModel.swift */; };
 		5E8C125A2C6F48AE001F3BB5 /* Seasons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8C12592C6F48AE001F3BB5 /* Seasons.swift */; };
-		5E94A3902C64B814006DF865 /* AnimeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E94A38F2C64B814006DF865 /* AnimeListView.swift */; };
+		5E94A3902C64B814006DF865 /* AnimeSeasonalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E94A38F2C64B814006DF865 /* AnimeSeasonalView.swift */; };
 		5E94A3942C64CAB0006DF865 /* Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E94A3932C64CAB0006DF865 /* Anime.swift */; };
 		5E94A3972C64CB78006DF865 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E94A3962C64CB78006DF865 /* NetworkManager.swift */; };
 		5E94A3992C64CC56006DF865 /* AnimeDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E94A3982C64CC56006DF865 /* AnimeDetailsView.swift */; };
-		5EE8F91B2C75DE490050E835 /* AnimeListView_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE8F91A2C75DE490050E835 /* AnimeListView_macOS.swift */; };
-		5EE8F9232C772C580050E835 /* AnimeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE8F9222C772C580050E835 /* AnimeListViewModel.swift */; };
+		5EE8F91B2C75DE490050E835 /* AnimeSeasonalView_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE8F91A2C75DE490050E835 /* AnimeSeasonalView_macOS.swift */; };
+		5EE8F9232C772C580050E835 /* AnimeSeasonalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE8F9222C772C580050E835 /* AnimeSeasonalViewModel.swift */; };
 		5EF28FC02E28F01A00B9A4D9 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF28FBF2E28F01A00B9A4D9 /* NavigationManager.swift */; };
+		5EF28FC32E28FD5B00B9A4D9 /* SeasonalNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF28FC22E28FD5B00B9A4D9 /* SeasonalNavigation.swift */; };
 		5EF33CAE2CEC98FC0046D61D /* AnimeSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF33CAD2CEC98FC0046D61D /* AnimeSearchView.swift */; };
 		5EF33CB02CEC990A0046D61D /* AnimeSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF33CAF2CEC990A0046D61D /* AnimeSearchViewModel.swift */; };
 		5EFE438E2C64A0D800163C60 /* StarnimeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFE438D2C64A0D800163C60 /* StarnimeApp.swift */; };
@@ -59,13 +60,14 @@
 		5E4CFC752C74735C0020CA33 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		5E4FEA9F2CD51AEA00630B38 /* AnimeDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeDetailsViewModel.swift; sourceTree = "<group>"; };
 		5E8C12592C6F48AE001F3BB5 /* Seasons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seasons.swift; sourceTree = "<group>"; };
-		5E94A38F2C64B814006DF865 /* AnimeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeListView.swift; sourceTree = "<group>"; };
+		5E94A38F2C64B814006DF865 /* AnimeSeasonalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeSeasonalView.swift; sourceTree = "<group>"; };
 		5E94A3932C64CAB0006DF865 /* Anime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anime.swift; sourceTree = "<group>"; };
 		5E94A3962C64CB78006DF865 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		5E94A3982C64CC56006DF865 /* AnimeDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeDetailsView.swift; sourceTree = "<group>"; };
-		5EE8F91A2C75DE490050E835 /* AnimeListView_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeListView_macOS.swift; sourceTree = "<group>"; };
-		5EE8F9222C772C580050E835 /* AnimeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeListViewModel.swift; sourceTree = "<group>"; };
+		5EE8F91A2C75DE490050E835 /* AnimeSeasonalView_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeSeasonalView_macOS.swift; sourceTree = "<group>"; };
+		5EE8F9222C772C580050E835 /* AnimeSeasonalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeSeasonalViewModel.swift; sourceTree = "<group>"; };
 		5EF28FBF2E28F01A00B9A4D9 /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
+		5EF28FC22E28FD5B00B9A4D9 /* SeasonalNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonalNavigation.swift; sourceTree = "<group>"; };
 		5EF33CAD2CEC98FC0046D61D /* AnimeSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeSearchView.swift; sourceTree = "<group>"; };
 		5EF33CAF2CEC990A0046D61D /* AnimeSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeSearchViewModel.swift; sourceTree = "<group>"; };
 		5EFE438A2C64A0D800163C60 /* Starnime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Starnime.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,7 +139,7 @@
 			children = (
 				5E40B2372D817D2000651E29 /* Components */,
 				5E94A3982C64CC56006DF865 /* AnimeDetailsView.swift */,
-				5E94A38F2C64B814006DF865 /* AnimeListView.swift */,
+				5E94A38F2C64B814006DF865 /* AnimeSeasonalView.swift */,
 				5EF33CAD2CEC98FC0046D61D /* AnimeSearchView.swift */,
 				5E2F5C7C2C747938007E9B2D /* SettingsView.swift */,
 				5EE8F9192C75DD7B0050E835 /* macOS */,
@@ -168,7 +170,7 @@
 		5EE8F9192C75DD7B0050E835 /* macOS */ = {
 			isa = PBXGroup;
 			children = (
-				5EE8F91A2C75DE490050E835 /* AnimeListView_macOS.swift */,
+				5EE8F91A2C75DE490050E835 /* AnimeSeasonalView_macOS.swift */,
 			);
 			path = macOS;
 			sourceTree = "<group>";
@@ -177,10 +179,18 @@
 			isa = PBXGroup;
 			children = (
 				5E4FEA9F2CD51AEA00630B38 /* AnimeDetailsViewModel.swift */,
-				5EE8F9222C772C580050E835 /* AnimeListViewModel.swift */,
+				5EE8F9222C772C580050E835 /* AnimeSeasonalViewModel.swift */,
 				5EF33CAF2CEC990A0046D61D /* AnimeSearchViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		5EF28FC12E28FB7600B9A4D9 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				5EF28FC22E28FD5B00B9A4D9 /* SeasonalNavigation.swift */,
+			);
+			path = Navigation;
 			sourceTree = "<group>";
 		};
 		5EFE43812C64A0D800163C60 = {
@@ -206,6 +216,7 @@
 		5EFE438C2C64A0D800163C60 /* Starnime */ = {
 			isa = PBXGroup;
 			children = (
+				5EF28FC12E28FB7600B9A4D9 /* Navigation */,
 				5EFE438D2C64A0D800163C60 /* StarnimeApp.swift */,
 				5E94A3922C64CA9B006DF865 /* Models */,
 				5E94A3952C64CB36006DF865 /* Managers */,
@@ -377,14 +388,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E94A3942C64CAB0006DF865 /* Anime.swift in Sources */,
-				5EE8F9232C772C580050E835 /* AnimeListViewModel.swift in Sources */,
-				5E94A3902C64B814006DF865 /* AnimeListView.swift in Sources */,
+				5EE8F9232C772C580050E835 /* AnimeSeasonalViewModel.swift in Sources */,
+				5E94A3902C64B814006DF865 /* AnimeSeasonalView.swift in Sources */,
 				5EF33CB02CEC990A0046D61D /* AnimeSearchViewModel.swift in Sources */,
 				5E94A3972C64CB78006DF865 /* NetworkManager.swift in Sources */,
+				5EF28FC32E28FD5B00B9A4D9 /* SeasonalNavigation.swift in Sources */,
 				5E8C125A2C6F48AE001F3BB5 /* Seasons.swift in Sources */,
 				5E2F5C7D2C747938007E9B2D /* SettingsView.swift in Sources */,
 				5E94A3992C64CC56006DF865 /* AnimeDetailsView.swift in Sources */,
-				5EE8F91B2C75DE490050E835 /* AnimeListView_macOS.swift in Sources */,
+				5EE8F91B2C75DE490050E835 /* AnimeSeasonalView_macOS.swift in Sources */,
 				5E4CFC762C74735C0020CA33 /* Settings.swift in Sources */,
 				5EFE43902C64A0D800163C60 /* ContentView.swift in Sources */,
 				5EF28FC02E28F01A00B9A4D9 /* NavigationManager.swift in Sources */,

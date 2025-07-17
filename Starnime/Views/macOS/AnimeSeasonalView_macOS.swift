@@ -5,19 +5,12 @@
 //  Created by Star_SNG on 2024/08/21.
 //
 
-#if os(macOS)
+//#if os(macOS)
 import SwiftUI
 
-enum NavDestination: Hashable
+struct AnimeSeasonalView_macOS: View
 {
-	case settings
-	case search
-	case details(malId: Int)
-}
-
-struct AnimeListView_macOS: View
-{
-	@EnvironmentObject var viewModel: AnimeListViewModel
+	@EnvironmentObject var viewModel: AnimeSeasonalViewModel
 	@EnvironmentObject var settings: Settings
 	@EnvironmentObject var navigationManager: NavigationManager
 	@StateObject private var animeSearchViewModel = AnimeSearchViewModel()
@@ -60,7 +53,7 @@ struct AnimeListView_macOS: View
 				animeSearchViewModel.searchQuery = ""
 			}
 		}
-		.navigationDestination(for: NavDestination.self)
+		.navigationDestination(for: SeasonalNavigationDestination.self)
 		{ destination in
 			switch destination
 			{
@@ -82,7 +75,7 @@ struct AnimeListView_macOS: View
 	{
 		HStack
 		{
-			NavigationLink(value: NavDestination.settings)
+			NavigationLink(value: SeasonalNavigationDestination.settings)
 			{
 				Image(systemName: "gear")
 					.font(.title)
@@ -95,7 +88,7 @@ struct AnimeListView_macOS: View
 				.fixedSize()
 				.frame(maxWidth: .infinity)
 			
-			NavigationLink(value: NavDestination.search)
+			NavigationLink(value: SeasonalNavigationDestination.search)
 			{
 				Image(systemName: "magnifyingglass")
 					.font(.title)
@@ -203,7 +196,7 @@ struct AnimeListView_macOS: View
 				{
 					ForEach(viewModel.animeList)
 					{ anime in
-						NavigationLink(value: NavDestination.details(malId: anime.mal_id))
+						NavigationLink(value: SeasonalNavigationDestination.details(malId: anime.mal_id))
 						{
 							VStack
 							{
@@ -287,10 +280,10 @@ struct AnimeListView_macOS: View
 {
 	NavigationStack
 	{
-		AnimeListView_macOS()
+		AnimeSeasonalView_macOS()
 	}
-	.environmentObject(AnimeListViewModel())
+	.environmentObject(AnimeSeasonalViewModel())
 	.environmentObject(Settings())
 	.environmentObject(NavigationManager())
 }
-#endif
+//#endif
