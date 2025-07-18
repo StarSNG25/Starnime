@@ -5,7 +5,7 @@
 //  Created by Star_SNG on 2024/08/21.
 //
 
-//#if os(macOS)
+#if os(macOS)
 import SwiftUI
 
 struct AnimeSeasonalView_macOS: View
@@ -57,16 +57,17 @@ struct AnimeSeasonalView_macOS: View
 		{ destination in
 			switch destination
 			{
-			case .settings:
-				SettingsView()
-			case .search:
-				AnimeSearchView()
-					.environmentObject(animeSearchViewModel)
-			case .details(let malId):
-				AnimeDetailsView()
-					.environmentObject(AnimeDetailsViewModel(malId: malId))
+				case .settings:
+					SettingsView()
+				case .search:
+					AnimeSearchView()
+						.environmentObject(animeSearchViewModel)
+				case .details(let malId):
+					AnimeDetailsView_macOS()
+						.environmentObject(AnimeDetailsViewModel(malId: malId))
 			}
 		}
+		.navigationTitle("Seasonal Anime")
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
 		.padding()
 	}
@@ -286,4 +287,4 @@ struct AnimeSeasonalView_macOS: View
 	.environmentObject(Settings())
 	.environmentObject(NavigationManager())
 }
-//#endif
+#endif

@@ -5,10 +5,10 @@
 //  Created by Star_SNG on 2024/08/08.
 //
 
-//#if !os(macOS)
+#if os(macOS)
 import SwiftUI
 
-struct AnimeDetailsView: View
+struct AnimeDetailsView_macOS: View
 {
 	@EnvironmentObject var viewModel: AnimeDetailsViewModel
 	
@@ -89,7 +89,7 @@ struct AnimeDetailsView: View
 						ErrorMessageView(errorMessage: errorMessage)
 					}
 				}
-				.padding(.horizontal, 8)
+				.padding(8)
 				.frame(maxWidth: .infinity, alignment: .center)
 			}
 			
@@ -110,6 +110,7 @@ struct AnimeDetailsView: View
 			await viewModel.fetchAnime()
 		}
 		.navigationTitle("Details")
+		.frame(maxWidth: .infinity, maxHeight: .infinity)
 	}
 }
 
@@ -117,8 +118,8 @@ struct AnimeDetailsView: View
 {
 	NavigationStack
 	{
-		AnimeDetailsView()
+		AnimeDetailsView_macOS()
 	}
 	.environmentObject(AnimeDetailsViewModel(malId: 54744))
 }
-//#endif
+#endif
