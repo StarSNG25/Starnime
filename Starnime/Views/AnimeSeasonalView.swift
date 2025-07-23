@@ -18,84 +18,84 @@ struct AnimeSeasonalView: View
 	var body: some View
 	{
 		list
-		.navigationTitle("Seasonal Anime")
-		.navigationBarTitleDisplayMode(.inline)
-		.toolbar
-		{
-			ToolbarItem(placement: .navigationBarLeading)
+			.navigationTitle("Seasonal Anime")
+			.navigationBarTitleDisplayMode(.inline)
+			.toolbar
 			{
-				NavigationLink(value: SeasonalNavigationDestination.settings)
+				ToolbarItem(placement: .navigationBarLeading)
 				{
-					Image(systemName: "gear")
-						.font(.title2)
+					NavigationLink(value: SeasonalNavigationDestination.settings)
+					{
+						Image(systemName: "gear")
+							.font(.title2)
+					}
+				}
+				
+				ToolbarItem(placement: .principal)
+				{
+					Text("Seasonal Anime")
+						.font(.title)
+						.fontWeight(.bold)
+				}
+				
+				ToolbarItem(placement: .navigationBarTrailing)
+				{
+					NavigationLink(value: SeasonalNavigationDestination.search )
+					{
+						Image(systemName: "magnifyingglass")
+							.font(.title2)
+					}
+				}
+				
+				ToolbarItem(placement: .bottomBar)
+				{
+					navSeason
 				}
 			}
-			
-			ToolbarItem(placement: .principal)
+			.onAppear
 			{
-				Text("Seasonal Anime")
-					.font(.title)
-					.fontWeight(.bold)
-			}
-			
-			ToolbarItem(placement: .navigationBarTrailing)
-			{
-				NavigationLink(value: SeasonalNavigationDestination.search )
+				Task
 				{
-					Image(systemName: "magnifyingglass")
-						.font(.title2)
+					await viewModel.fetchSeason()
+					viewModel.latestSeason = await NetworkManager().getLatestSeason()
 				}
 			}
-			
-			ToolbarItem(placement: .bottomBar)
-			{
-				navSeason
-			}
-		}
-		.onAppear
-		{
-			Task
-			{
-				await viewModel.fetchSeason()
-				viewModel.latestSeason = await NetworkManager().getLatestSeason()
-			}
-		}
-		.refreshable
-		{
-			viewModel.resetPage()
-			await viewModel.fetchSeason()
-		}
-		.onChange(of: settings.hideNSFW)
-		{
-			Task
+			.refreshable
 			{
 				viewModel.resetPage()
 				await viewModel.fetchSeason()
 			}
-		}
-		.onChange(of: navigationManager.path)
-		{
-			if navigationManager.path.isEmpty
+			.onChange(of: settings.hideNSFW)
 			{
-				animeSearchViewModel.resetPage()
-				animeSearchViewModel.searchText = ""
-				animeSearchViewModel.searchQuery = ""
+				Task
+				{
+					viewModel.resetPage()
+					await viewModel.fetchSeason()
+				}
 			}
-		}
-		.navigationDestination(for: SeasonalNavigationDestination.self)
-		{ destination in
-			switch destination
+			.onChange(of: navigationManager.path)
 			{
-				case .settings:
-					SettingsView()
-				case .search:
-					AnimeSearchView()
-						.environmentObject(animeSearchViewModel)
-				case .details(let malId):
-					AnimeDetailsView(malId: malId)
+				if navigationManager.path.isEmpty
+				{
+					animeSearchViewModel.resetPage()
+					animeSearchViewModel.searchText = ""
+					animeSearchViewModel.searchQuery = ""
+				}
 			}
-		}
-		.frame(maxWidth: .infinity, maxHeight: .infinity)
+			.navigationDestination(for: SeasonalNavigationDestination.self)
+			{ destination in
+				switch destination
+				{
+					case .settings:
+						SettingsView()
+					case .search:
+						AnimeSearchView()
+							.environmentObject(animeSearchViewModel)
+					case .details(let malId):
+						AnimeDetailsView(malId: malId)
+				}
+			}
+			.frame(maxWidth: .infinity, maxHeight: .infinity)
 	}
 	
 	private var navSeason: some View
