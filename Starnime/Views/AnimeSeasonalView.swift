@@ -40,7 +40,7 @@ struct AnimeSeasonalView: View
 				
 				ToolbarItem(placement: .navigationBarTrailing)
 				{
-					NavigationLink(value: SeasonalNavigationDestination.search )
+					NavigationLink(value: SeasonalNavigationDestination.search)
 					{
 						Image(systemName: "magnifyingglass")
 							.font(.title2)
