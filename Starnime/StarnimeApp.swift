@@ -31,5 +31,8 @@ struct StarnimeApp: App
 			.environmentObject(navigationManager)
 			.preferredColorScheme(settings.isDarkMode ? .dark : .light)
 		}
+		#if os(macOS)
+			.defaultSize(width: 1280, height: 720)
+		#endif
 	}
 }
