@@ -1,5 +1,5 @@
 //
-//  AnimeListView_macOS.swift
+//  AnimeSeasonalView_macOS.swift
 //  Starnime
 //
 //  Created by Star_SNG on 2024/08/21.

@@ -1,8 +1,8 @@
 //
-//  AnimeDetailsView.swift
+//  AnimeDetailsView_macOS.swift
 //  Starnime
 //
-//  Created by Star_SNG on 2024/08/08.
+//  Created by Star_SNG on 2025/07/18.
 //
 
 #if os(macOS)
