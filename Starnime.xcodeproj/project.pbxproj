@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5E018DC62E2A37D100FD998C /* AnimeDetailsView_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E018DC52E2A37D100FD998C /* AnimeDetailsView_macOS.swift */; };
 		5E0781162C6E09F000D90835 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E0781152C6E09F000D90835 /* Launch Screen.storyboard */; platformFilters = (ios, maccatalyst, ); };
+		5E2D710F2E30E0C4004AE48A /* SearchNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2D710E2E30E0C4004AE48A /* SearchNavigation.swift */; };
 		5E2F5C7D2C747938007E9B2D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2F5C7C2C747938007E9B2D /* SettingsView.swift */; };
 		5E2F5C842C7491DC007E9B2D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5E2F5C832C7491DC007E9B2D /* Settings.bundle */; };
 		5E40B2392D817D5B00651E29 /* CenteredContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E40B2382D817D5B00651E29 /* CenteredContainer.swift */; };
@@ -55,6 +56,7 @@
 /* Begin PBXFileReference section */
 		5E018DC52E2A37D100FD998C /* AnimeDetailsView_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeDetailsView_macOS.swift; sourceTree = "<group>"; };
 		5E0781152C6E09F000D90835 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		5E2D710E2E30E0C4004AE48A /* SearchNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNavigation.swift; sourceTree = "<group>"; };
 		5E2F5C7C2C747938007E9B2D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		5E2F5C832C7491DC007E9B2D /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		5E40B2382D817D5B00651E29 /* CenteredContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenteredContainer.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 		5EF28FC12E28FB7600B9A4D9 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				5E2D710E2E30E0C4004AE48A /* SearchNavigation.swift */,
 				5EF28FC22E28FD5B00B9A4D9 /* SeasonalNavigation.swift */,
 			);
 			path = Navigation;
@@ -409,6 +412,7 @@
 				5E40B2392D817D5B00651E29 /* CenteredContainer.swift in Sources */,
 				5EFE438E2C64A0D800163C60 /* StarnimeApp.swift in Sources */,
 				5EF33CAE2CEC98FC0046D61D /* AnimeSearchView.swift in Sources */,
+				5E2D710F2E30E0C4004AE48A /* SearchNavigation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

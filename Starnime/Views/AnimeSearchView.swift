@@ -39,8 +39,18 @@ struct AnimeSearchView: View
 				await viewModel.fetchSearch()
 			}
 		}
-		.frame(maxWidth: .infinity, maxHeight: .infinity)
+		.navigationDestination(for: SearchNavigationDestination.self)
+		{ destination in
+			switch destination
+			{
+				case .settings:
+					SettingsView()
+				case .details(let malId):
+					AnimeDetailsView(malId: malId)
+			}
+		}
 		.navigationTitle("Search")
+		.frame(maxWidth: .infinity, maxHeight: .infinity)
 	}
 	
 	private var header: some View
@@ -62,7 +72,7 @@ struct AnimeSearchView: View
 					.scaleEffect(isSearchFieldFocused ? 1 : 0)
 					.zIndex(isSearchFieldFocused ? 1 : 0)
 					
-					NavigationLink(destination: SettingsView())
+					NavigationLink(value: SearchNavigationDestination.settings)
 					{
 						Image(systemName: "gear")
 							.font(.title)
@@ -106,7 +116,7 @@ struct AnimeSearchView: View
 				{
 					ForEach(viewModel.animeList)
 					{ anime in
-						NavigationLink(destination: AnimeDetailsView(malId: anime.mal_id))
+						NavigationLink(value: SearchNavigationDestination.details(malId: anime.mal_id))
 						{
 							VStack
 							{
