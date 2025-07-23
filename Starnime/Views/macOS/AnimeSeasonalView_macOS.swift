@@ -46,11 +46,14 @@ struct AnimeSeasonalView_macOS: View
 		}
 		.onChange(of: navigationManager.path)
 		{
-			if navigationManager.path.isEmpty
+			Task
 			{
-				animeSearchViewModel.resetPage()
-				animeSearchViewModel.searchText = ""
-				animeSearchViewModel.searchQuery = ""
+				if navigationManager.path.isEmpty
+				{
+					animeSearchViewModel.resetPage()
+					animeSearchViewModel.searchText = ""
+					animeSearchViewModel.searchQuery = ""
+				}
 			}
 		}
 		.navigationDestination(for: SeasonalNavigationDestination.self)
