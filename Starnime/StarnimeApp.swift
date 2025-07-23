@@ -13,6 +13,7 @@ struct StarnimeApp: App
 	@StateObject private var settings = Settings()
 	@StateObject private var viewModel = AnimeSeasonalViewModel()
 	@StateObject private var navigationManager = NavigationManager()
+	@Environment(\.scenePhase) private var scenePhase
 	
 	var body: some Scene
 	{
@@ -33,6 +34,13 @@ struct StarnimeApp: App
 		}
 		#if os(macOS)
 			.defaultSize(width: 1280, height: 720)
+			.onChange(of: scenePhase)
+			{ oldPhase, newPhase in
+				if newPhase == .background
+				{
+					navigationManager.path = NavigationPath()
+				}
+			}
 		#endif
 	}
 }
