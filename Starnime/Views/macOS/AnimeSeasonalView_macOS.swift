@@ -63,8 +63,7 @@ struct AnimeSeasonalView_macOS: View
 					AnimeSearchView()
 						.environmentObject(animeSearchViewModel)
 				case .details(let malId):
-					AnimeDetailsView_macOS()
-						.environmentObject(AnimeDetailsViewModel(malId: malId))
+					AnimeDetailsView_macOS(malId: malId)
 			}
 		}
 		.navigationTitle("Seasonal Anime")

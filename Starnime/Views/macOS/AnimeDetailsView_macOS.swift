@@ -10,7 +10,12 @@ import SwiftUI
 
 struct AnimeDetailsView_macOS: View
 {
-	@EnvironmentObject var viewModel: AnimeDetailsViewModel
+	@StateObject var viewModel: AnimeDetailsViewModel
+	
+	init(malId: Int)
+	{
+		_viewModel = StateObject(wrappedValue: AnimeDetailsViewModel(malId: malId))
+	}
 	
 	var body: some View
 	{
@@ -118,8 +123,7 @@ struct AnimeDetailsView_macOS: View
 {
 	NavigationStack
 	{
-		AnimeDetailsView_macOS()
+		AnimeDetailsView_macOS(malId: 54744)
 	}
-	.environmentObject(AnimeDetailsViewModel(malId: 54744))
 }
 #endif

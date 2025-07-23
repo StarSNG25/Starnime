@@ -92,8 +92,7 @@ struct AnimeSeasonalView: View
 					AnimeSearchView()
 						.environmentObject(animeSearchViewModel)
 				case .details(let malId):
-					AnimeDetailsView()
-						.environmentObject(AnimeDetailsViewModel(malId: malId))
+					AnimeDetailsView(malId: malId)
 			}
 		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
